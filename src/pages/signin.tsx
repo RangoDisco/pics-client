@@ -1,4 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
+import TextInput from "../components/TextInput";
 import { useAuth } from "../contexts/Auth/AuthProvider";
 
 const SignIn: FC = () => {
@@ -23,30 +24,21 @@ const SignIn: FC = () => {
         onSubmit={handleFormSubmit}
       >
         <div className="w-1/4 flex flex-col">
-          <label htmlFor="username" className="self-start">
-            Username
-          </label>
-          <input
-            required
-            name="username"
-            id="username"
-            className="mt-2 shadow border-b bg-richBlack border-ghostWhite transition-colors duration-200 focus:outline-none focus:border-b-munsellBlue"
+          <TextInput
+            label="username"
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            setValue={setUsername}
+            required={true}
           />
         </div>
         <div className="w-1/4 flex flex-col mt-8">
-          <label htmlFor="password" className="textMunsellBlue self-start">
-            Password
-          </label>
-          <input
-            required
-            name="password"
-            id="password"
+          <TextInput
+            label="password"
             type="password"
-            className="mt-2 shadow border-b bg-richBlack border-ghostWhite focus:outline-none focus:border-b-munsellBlue"
-            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            setValue={setPassword}
+            required={true}
           />
           <button
             disabled={!isFormValid}

@@ -9,6 +9,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 // import * as dotenv from "dotenv";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -38,6 +39,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AuthProvider>
         <NavBar />
         <Component {...pageProps} />
+        <Footer />
       </AuthProvider>
     </ApolloProvider>
   );
