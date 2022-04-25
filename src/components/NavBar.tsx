@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { FC } from "react";
+import { FaSignOutAlt as SignOutIcon, FaCameraRetro } from "react-icons/fa";
 
 const NavBar: FC = () => {
   return (
-    <div className="bg-raisinBlack p-4 flex flex-row justify-between text-ghostWhite sticky top-0 z-50">
+    <div className="bg-raisinBlack p-4 flex flex-row justify-between items-center text-ghostWhite sticky top-0 z-50">
       <Link href="/" passHref>
-        <h1 className="text-honeyYellow cursor-pointer">Pic-Nic</h1>
+        <div className="transition-color duration-200 hover:text-munsellBlue cursor-pointer">
+          <FaCameraRetro size={26} />
+        </div>
       </Link>
       <div className="flex flex-row gap-20">
         <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
@@ -25,7 +28,9 @@ const NavBar: FC = () => {
           </p>
         </Link>
       </div>
-      <p className="justify-self-end cursor-pointer">Sign Out</p>
+      <p className="mr-2 justify-self-end cursor-pointer">
+        <SignOutIcon className="transition-color duration-200 hover:text-munsellBlue" />
+      </p>
     </div>
   );
 };
