@@ -1,5 +1,7 @@
 import { FC } from "react";
 import CollectionCard from "../../components/CollectionCard";
+import { ICollection } from "../../contexts/Pictures/types";
+import { collectionArray } from "../../data";
 
 const Collections: FC = () => {
   return (
@@ -7,12 +9,9 @@ const Collections: FC = () => {
       className="p-4 grid grid-cols-4 gap-6 bg-richBlack text-ghostWhite"
       style={{ minHeight: "94.1vh" }}
     >
-      <CollectionCard />
-      <CollectionCard />
-      <CollectionCard />
-      <CollectionCard />
-      <CollectionCard />
-      <CollectionCard />
+      {collectionArray.map((collection: ICollection, index: number) => (
+        <CollectionCard {...collection} key={`collection-${index}`} />
+      ))}
     </section>
   );
 };

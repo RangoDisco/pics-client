@@ -19,5 +19,5 @@ export interface ICollection {
   author: IUser;
   category: string;
   tags: string[];
-  music: string;
+  musicLink: string;
 }
