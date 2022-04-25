@@ -25,7 +25,7 @@ const TextInput: FC<IProps> = ({
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="mt shadow border-b bg-richBlack border-ghostWhite focus:outline-none focus:border-b-munsellBlue"
+        className="mt shadow border-b bg-richBlack transition-color duration-200 border-ghostWhite outline-none focus:border-b-munsellBlue"
       />
     </>
   );
