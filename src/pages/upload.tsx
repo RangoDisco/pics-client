@@ -1,10 +1,13 @@
 import { ChangeEvent, FC, useRef, useState } from "react";
+import Select from "../components/Select";
 import TextInput from "../components/TextInput";
+import { ICollection } from "../contexts/Pictures/types";
 
 const Upload: FC = () => {
   const [title, setTitle] = useState<string>("");
   const [date, setDate] = useState<Date | null>(null);
   const [location, setLocation] = useState<string>("");
+  const [collection, setCollection] = useState<ICollection>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFileInput = () => {
@@ -51,6 +54,7 @@ const Upload: FC = () => {
             required={true}
           />
         </div>
+        <div className="flex flex-col mt-8"></div>
         <div className="mt-8">
           <button type="button" onClick={handleFileInput}>
             Add picture

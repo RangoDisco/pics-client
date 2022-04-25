@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 import TextInput from "../components/TextInput";
 import { useAuth } from "../contexts/Auth/AuthProvider";
 
@@ -8,7 +8,7 @@ const SignIn: FC = () => {
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const { handleSignIn } = useAuth();
 
-  const handleFormSubmit = (event: any) => {
+  const handleFormSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     console.log(username, password);
   };
