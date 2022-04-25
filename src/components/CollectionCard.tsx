@@ -7,7 +7,7 @@ import { FaSpotify } from "react-icons/fa";
 const CollectionCard: FC<ICollection> = (collection) => {
   const handleSpotifyClick = (event: React.MouseEvent<SVGElement>) => {
     event.stopPropagation();
-    window.open(collection.music, "_blank");
+    window.open(collection.musicLink, "_blank");
   };
   return (
     <Link href={`/collections/${collection.id}`} passHref>
