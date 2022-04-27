@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { FaSpotify } from "react-icons/fa";
-import PictureCard from "../../components/PictureCard";
+import PictureCard from "../../components/Cards/Picture/PictureCard";
 import { picturesArray } from "../../data";
 
 const Collection: FC = () => {

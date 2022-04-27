@@ -1,5 +1,5 @@
 import { FC } from "react";
-import CollectionCard from "../../components/CollectionCard";
+import CollectionCard from "../../components/Cards/Collection/CollectionCard";
 import { ICollection } from "../../contexts/Pictures/types";
 import { collectionArray } from "../../data";
 

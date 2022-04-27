@@ -36,7 +36,6 @@ function RouteGuard({ children }: any) {
     const path = url.split("?")[0];
     const res = await fetchCurrentUser();
     const user = res.data.getSignedInUser;
-    console.log(user);
     if (
       (!user && !publicPaths.includes(path)) ||
       (adminPaths.includes(path) && user?.role !== "Admin")
