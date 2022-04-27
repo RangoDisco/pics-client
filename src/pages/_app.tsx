@@ -43,9 +43,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <AuthProvider>
         <PicturesProvider>
           <NavBar />
-          <RouteGuard>
-            <Component {...pageProps} />
-          </RouteGuard>
+          <div style={{ backgroundColor: "#111418", minHeight: "100vh" }}>
+            <RouteGuard>
+              <Component {...pageProps} />
+            </RouteGuard>
+          </div>
           <Footer />
         </PicturesProvider>
       </AuthProvider>
