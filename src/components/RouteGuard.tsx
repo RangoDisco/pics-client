@@ -34,16 +34,20 @@ function RouteGuard({ children }: any) {
     const publicPaths = ["/signin"];
     const adminPaths = ["/uploads"];
     const path = url.split("?")[0];
-    const res = await fetchCurrentUser();
-    const user = res.data.getSignedInUser;
-    if (
-      (!user && !publicPaths.includes(path)) ||
-      (adminPaths.includes(path) && user?.role !== "Admin")
-    ) {
+    if (publicPaths.includes(path)) {
+      setAuthorized(true);
+    } else if (localStorage.getItem("token")) {
+      const res = await fetchCurrentUser();
+      const user = res.data?.getSignedInUser;
+      if (!user || (adminPaths.includes(path) && user?.role !== "Admin")) {
+        setAuthorized(false);
+        router.push("/signin");
+      } else {
+        setAuthorized(true);
+      }
+    } else {
       setAuthorized(false);
       router.push("/signin");
-    } else {
-      setAuthorized(true);
     }
   }
 

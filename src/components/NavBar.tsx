@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { FaSignOutAlt as SignOutIcon, FaCameraRetro } from "react-icons/fa";
 import { useAuth } from "../contexts/Auth/AuthProvider";
 
@@ -12,9 +12,7 @@ const NavBar: FC = () => {
     signOut();
     Router.push("/signin");
   };
-  useEffect(() => {
-    console.log("current", currentUser);
-  }, [currentUser]);
+
   return (
     <>
       {router.asPath !== "/signin" && currentUser && (
