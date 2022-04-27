@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, FC, MouseEventHandler } from "react";
-import { ICollection, IPicture } from "../contexts/Pictures/types";
+import { ICollection, IPicture } from "../../../contexts/Pictures/types";
 import { FaSpotify } from "react-icons/fa";
 
 const CollectionCard: FC<ICollection> = (collection) => {
