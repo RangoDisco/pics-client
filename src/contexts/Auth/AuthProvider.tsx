@@ -1,7 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
-import React, { useContext, useEffect, useState } from "react";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
-import { SIGNIN, GETCURRENTUSER } from "./gql/mutations";
+import { IUser } from "../Users/types";
+import { SIGNIN } from "./gql/mutations";
+import { GETCURRENTUSER } from "./gql/queries";
 import { IAuthContext } from "./types";
 interface IProps {
   children: ReactNode;
@@ -10,9 +12,10 @@ const authContext = React.createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider = (props: IProps) => {
   const [isConnected, setIsConnected] = useState(false);
+  const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { data: getSignedInUserData, refetch } = useQuery(GETCURRENTUSER);
+  const [execWhoAmI] = useLazyQuery(GETCURRENTUSER);
   const [doSignIn] = useMutation(SIGNIN);
 
   const handleSignIn = async (username: string, password: string) => {
@@ -24,16 +27,16 @@ const AuthProvider = (props: IProps) => {
           password: password,
         },
       });
-      if (res.data.signin) {
-        localStorage.setItem("token", res.data.signin);
-        await refetch();
+      if (res.data.login) {
+        localStorage.setItem("token", res.data.login.access_token);
+        await fetchCurrentUser();
       } else {
         setError("Your email or your password is incorrect");
       }
     } catch (error) {
-      console.error(error);
+      setError("Your email or your password is incorrect");
     } finally {
-      setIsLoading;
+      setIsLoading(false);
     }
   };
 
@@ -42,19 +45,32 @@ const AuthProvider = (props: IProps) => {
     setIsConnected(false);
   };
 
+  const fetchCurrentUser = useCallback(async () => {
+    const userRes = await execWhoAmI();
+    setCurrentUser(userRes.data.getSignedInUser);
+    return userRes;
+  }, [execWhoAmI]);
+
   useEffect(() => {
-    if (getSignedInUserData) {
-      setIsConnected(true);
-    } else {
-      setIsConnected(false);
-    }
-  }, [getSignedInUserData]);
+    (async () => {
+      if (currentUser) {
+        setIsConnected(true);
+      } else {
+        if (localStorage.getItem("token")) {
+          await fetchCurrentUser();
+          setIsConnected(true);
+        } else {
+          setIsConnected(false);
+        }
+      }
+    })();
+  }, [currentUser, fetchCurrentUser]);
 
   const contextValue: IAuthContext = {
     isConnected,
     setIsConnected,
-    checkLogin: refetch,
-    currentUser: getSignedInUserData?.getSignedInUser,
+    currentUser,
+    fetchCurrentUser,
     handleSignIn,
     error,
     isLoading,

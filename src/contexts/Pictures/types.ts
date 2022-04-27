@@ -1,4 +1,12 @@
 import { IUser } from "../Users/types";
+
+export interface IPicturesContext {
+  pictures: IPicture[];
+  picture: IPicture | null;
+  isLoading: boolean;
+  fetchPictures: () => Promise<void>;
+  fetchPictureById: (id: number) => Promise<void>;
+}
 export interface IPicture {
   id: number;
   title: string;
