@@ -33,9 +33,11 @@ const NavBar: FC = () => {
                 Collections
               </p>
             </Link>
-            <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
-              Random
-            </p>
+            <Link href="/pictures/random" passHref>
+              <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
+                Random
+              </p>
+            </Link>
             {currentUser && currentUser.role === "Admin" && (
               <Link href="/upload" passHref>
                 <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">

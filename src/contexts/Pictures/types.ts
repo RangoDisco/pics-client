@@ -8,6 +8,7 @@ export interface IPicturesContext {
   isLoading: boolean;
   fetchPictures: () => Promise<void>;
   fetchPictureById: (id: number) => Promise<void>;
+  fetchRandomPicture: () => Promise<void>;
   fetchCollections: () => Promise<void>;
   fetchCollectionById: (id: number) => Promise<void>;
 }

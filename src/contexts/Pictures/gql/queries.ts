@@ -30,6 +30,19 @@ export const FETCHPICTUREBYID = gql`
   }
 `;
 
+export const FETCHRANDOMPICTURE = gql`
+  query findRandom {
+    pictureRandom {
+      id
+      title
+      contentUrl
+      location
+      date
+      creationDate
+    }
+  }
+`;
+
 export const FETCHCOLLECTIONS = gql`
   query {
     collections {

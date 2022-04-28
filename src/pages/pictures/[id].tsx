@@ -7,13 +7,17 @@ import Head from "next/head";
 const FullPicture: FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { picture, fetchPictureById, isLoading } = usePics();
+  const { picture, fetchPictureById, isLoading, fetchRandomPicture } =
+    usePics();
 
   useEffect(() => {
     (async () => {
-      id && (await fetchPictureById(+id));
+      id && id !== "random"
+        ? await fetchPictureById(+id)
+        : await fetchRandomPicture();
     })();
-  }, [fetchPictureById, id]);
+  }, [fetchPictureById, fetchRandomPicture, id]);
+
   return (
     <>
       <Head>

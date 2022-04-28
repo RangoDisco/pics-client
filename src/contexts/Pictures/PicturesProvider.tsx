@@ -11,6 +11,7 @@ import {
   FETCHCOLLECTIONS,
   FETCHPICTUREBYID,
   FETCHPICTURES,
+  FETCHRANDOMPICTURE,
 } from "./gql/queries";
 import { ICollection, IPicture, IPicturesContext } from "./types";
 
@@ -29,6 +30,7 @@ const PicturesProvider = (props: IProps) => {
   const [execFindOne] = useLazyQuery(FETCHPICTUREBYID);
   const [execFindCollections] = useLazyQuery(FETCHCOLLECTIONS);
   const [execFindCollectionById] = useLazyQuery(FETCHCOLLECTIONBYID);
+  const [execFindRandom] = useLazyQuery(FETCHRANDOMPICTURE);
 
   const fetchPictures = useCallback(async () => {
     setIsLoading(true);
@@ -56,6 +58,18 @@ const PicturesProvider = (props: IProps) => {
     },
     [execFindOne]
   );
+
+  const fetchRandomPicture = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const res = await execFindRandom();
+      setPicture(res.data.pictureRandom);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [execFindRandom]);
 
   const fetchCollections = useCallback(async () => {
     setIsLoading(true);
@@ -95,6 +109,7 @@ const PicturesProvider = (props: IProps) => {
     isLoading,
     fetchPictures,
     fetchPictureById,
+    fetchRandomPicture,
     fetchCollections,
     fetchCollectionById,
   };
