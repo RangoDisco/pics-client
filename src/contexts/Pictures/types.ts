@@ -3,9 +3,13 @@ import { IUser } from "../Users/types";
 export interface IPicturesContext {
   pictures: IPicture[];
   picture: IPicture | null;
+  collections: ICollection[];
+  collection: ICollection | null;
   isLoading: boolean;
   fetchPictures: () => Promise<void>;
   fetchPictureById: (id: number) => Promise<void>;
+  fetchCollections: () => Promise<void>;
+  fetchCollectionById: (id: number) => Promise<void>;
 }
 export interface IPicture {
   id: number;
@@ -25,7 +29,17 @@ export interface ICollection {
   description: string;
   pictures: IPicture[];
   author: IUser;
-  category: string;
-  tags: string[];
+  category: ICategory;
+  tags: ITag[];
   musicLink: string;
+}
+
+export interface ICategory {
+  id: number;
+  title: string;
+}
+
+export interface ITag {
+  id: number;
+  title: string;
 }

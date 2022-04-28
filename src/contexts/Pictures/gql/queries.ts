@@ -29,3 +29,56 @@ export const FETCHPICTUREBYID = gql`
     }
   }
 `;
+
+export const FETCHCOLLECTIONS = gql`
+  query {
+    collections {
+      id
+      title
+      date
+      description
+      category {
+        id
+        title
+      }
+      tags {
+        id
+        title
+      }
+      pictures {
+        id
+        title
+        contentUrl
+      }
+      musicLink
+    }
+  }
+`;
+
+export const FETCHCOLLECTIONBYID = gql`
+  query ($id: Int!) {
+    collection(id: $id) {
+      id
+      title
+      date
+      description
+      date
+      category {
+        id
+        title
+      }
+      tags {
+        id
+        title
+      }
+      pictures {
+        id
+        title
+        contentUrl
+        date
+        location
+      }
+      musicLink
+    }
+  }
+`;
