@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import Select from "../components/Select";
 import TextInput from "../components/TextInput";
@@ -28,48 +29,54 @@ const Upload: FC = () => {
   };
 
   return (
-    <section
-      className="h-full bg-richBlack text-ghostWhite"
-      style={{ minHeight: "94.1vh" }}
-    >
-      <form
-        style={{ height: "94.1vh" }}
-        className="h-full flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
+    <>
+      <Head>
+        <title>Pic-Nic Upload</title>
+        <meta name="description" content="Page upload" />
+      </Head>
+      <section
+        className="h-full bg-richBlack text-ghostWhite"
+        style={{ minHeight: "94.1vh" }}
       >
-        <div className="flex flex-col">
-          <TextInput
-            label="title"
-            type="text"
-            value={title}
-            setValue={setTitle}
-            required={true}
-          />
-        </div>
-        <div className="flex flex-col mt-8">
-          <TextInput
-            label="location"
-            type="location"
-            value={location}
-            setValue={setLocation}
-            required={true}
-          />
-        </div>
-        <div className="flex flex-col mt-8"></div>
-        <div className="mt-8">
-          <button type="button" onClick={handleFileInput}>
-            Add picture
-          </button>
-          <input
-            multiple={false}
-            name="pictureFile"
-            onChange={onChangeHandler}
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            type="file"
-          />
-        </div>
-      </form>
-    </section>
+        <form
+          style={{ height: "94.1vh" }}
+          className="h-full flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
+        >
+          <div className="flex flex-col">
+            <TextInput
+              label="title"
+              type="text"
+              value={title}
+              setValue={setTitle}
+              required={true}
+            />
+          </div>
+          <div className="flex flex-col mt-8">
+            <TextInput
+              label="location"
+              type="location"
+              value={location}
+              setValue={setLocation}
+              required={true}
+            />
+          </div>
+          <div className="flex flex-col mt-8"></div>
+          <div className="mt-8">
+            <button type="button" onClick={handleFileInput}>
+              Add picture
+            </button>
+            <input
+              multiple={false}
+              name="pictureFile"
+              onChange={onChangeHandler}
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              type="file"
+            />
+          </div>
+        </form>
+      </section>
+    </>
   );
 };
 

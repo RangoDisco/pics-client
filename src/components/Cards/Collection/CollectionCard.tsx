@@ -25,32 +25,35 @@ const CollectionCard: FC<ICollection> = ({
         <div className="w-full h-3/4 flex flex-row">
           {pictures &&
             pictures.length > 0 &&
-            pictures.map((picture: IPicture, index: number) => (
-              <div
-                className={`w-1/3 h-full relative border border-solid border-raisinBlack rounded-lg ${
-                  index === 0
-                    ? "z-0 mt-5"
-                    : index === 1
-                    ? "z-0 w-2/4 transition-all duration-200 hover:w-full"
-                    : "z-0 mt-5"
-                }`}
-                key={index}
-              >
-                <Image
-                  src={`http://localhost:4000/${picture.contentUrl}`}
-                  alt="random image"
-                  layout="fill"
-                  objectFit="cover"
-                  className={`rounded-md ${
-                    index === 0
-                      ? "rounded-r-none"
-                      : index === 2
-                      ? "rounded-l-none"
-                      : null
-                  }`}
-                />
-              </div>
-            ))}
+            pictures.map(
+              (picture: IPicture, index: number) =>
+                index < 3 && (
+                  <div
+                    className={`w-1/3 h-full relative border border-solid border-raisinBlack rounded-lg ${
+                      index === 0
+                        ? "z-0 mt-5"
+                        : index === 1
+                        ? "z-0 w-2/4 transition-all duration-200 hover:w-full"
+                        : "z-0 mt-5"
+                    }`}
+                    key={index}
+                  >
+                    <Image
+                      src={`http://localhost:4000/${picture.contentUrl}`}
+                      alt="random image"
+                      layout="fill"
+                      objectFit="cover"
+                      className={`rounded-md ${
+                        index === 0
+                          ? "rounded-r-none"
+                          : index === 2
+                          ? "rounded-l-none"
+                          : null
+                      }`}
+                    />
+                  </div>
+                )
+            )}
         </div>
         <div className="px-4 -mt-20 relative z-30">
           <div className="bg-raisinBlack p-6 rounded-lg shadow-lg">
