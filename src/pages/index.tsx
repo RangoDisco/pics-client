@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="bg-richBlack text-ghostWhite">
-      <section className="p-4 grid grid-cols-4 gap-6">
+      <section className="p-4 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
         {pictures?.length > 0 ? (
           pictures.map((picture) => (
             <PictureCard

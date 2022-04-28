@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC, forwardRef } from "react";
+import { FC, forwardRef, useEffect } from "react";
 
 export interface IProps {
   id: number;

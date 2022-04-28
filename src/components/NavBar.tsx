@@ -22,10 +22,12 @@ const NavBar: FC = () => {
               <FaCameraRetro size={26} />
             </div>
           </Link>
-          <div className="flex flex-row gap-20">
-            <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
-              Random
-            </p>
+          <div className="flex flex-row lg:gap-20 md:gap-10 gap-5">
+            <Link href="/" passHref>
+              <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
+                Photos
+              </p>
+            </Link>
             <Link href="/collections" passHref>
               <p className="transition:colors duration-200 hover:text-munsellBlue hover:cursor-pointer">
                 Collections
