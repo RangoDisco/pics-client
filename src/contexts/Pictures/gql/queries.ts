@@ -1,18 +1,23 @@
 import { gql } from "@apollo/client";
 
 export const FETCHPICTURES = gql`
-  query {
-    pictures {
-      id
-      title
-      contentUrl
-      location
-      date
-      creationDate
-      collections {
+  query ($first: Int!, $after: Int!) {
+    picturesPage(
+      filterPictureInput: { pagination: { first: $first, after: $after } }
+    ) {
+      pictures {
         id
         title
+        contentUrl
+        location
+        date
+        creationDate
+        collections {
+          id
+          title
+        }
       }
+      totalCount
     }
   }
 `;
@@ -44,26 +49,31 @@ export const FETCHRANDOMPICTURE = gql`
 `;
 
 export const FETCHCOLLECTIONS = gql`
-  query {
-    collections {
-      id
-      title
-      date
-      description
-      category {
+  query ($first: Int!, $after: Int!) {
+    collectionsPage(
+      filterCollectionInput: { pagination: { first: $first, after: $after } }
+    ) {
+      collections {
         id
         title
+        date
+        description
+        category {
+          id
+          title
+        }
+        tags {
+          id
+          title
+        }
+        pictures {
+          id
+          title
+          contentUrl
+        }
+        musicLink
       }
-      tags {
-        id
-        title
-      }
-      pictures {
-        id
-        title
-        contentUrl
-      }
-      musicLink
+      totalCount
     }
   }
 `;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FC, useEffect } from "react";
 import { ICollection, IPicture } from "../../../contexts/Pictures/types";
 import { FaSpotify } from "react-icons/fa";
+import SpotifyLogoLink from "../../SpotifyLogoLink";
 
 const CollectionCard: FC<ICollection> = ({
   title,
@@ -86,10 +87,7 @@ const CollectionCard: FC<ICollection> = ({
               <span className="text-sm">{description}</span>
             </div>
             <div className="w-full flex justify-end">
-              <FaSpotify
-                className="cursor-pointer hover:text-munsellBlue"
-                onClick={handleSpotifyClick}
-              />
+              <SpotifyLogoLink size={18} musicLink={musicLink} />
             </div>
           </div>
         </div>

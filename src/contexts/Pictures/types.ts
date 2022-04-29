@@ -2,14 +2,24 @@ import { IUser } from "../Users/types";
 
 export interface IPicturesContext {
   pictures: IPicture[];
+  picturesTotalCount: number;
   picture: IPicture | null;
   collections: ICollection[];
+  collectionsTotalCount: number;
   collection: ICollection | null;
   isLoading: boolean;
-  fetchPictures: () => Promise<void>;
+  fetchPictures: (
+    first: number,
+    after: number,
+    exPics: IPicture[]
+  ) => Promise<void>;
   fetchPictureById: (id: number) => Promise<void>;
   fetchRandomPicture: () => Promise<void>;
-  fetchCollections: () => Promise<void>;
+  fetchCollections: (
+    first: number,
+    after: number,
+    exColls: ICollection[]
+  ) => Promise<void>;
   fetchCollectionById: (id: number) => Promise<void>;
 }
 export interface IPicture {

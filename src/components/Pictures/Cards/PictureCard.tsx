@@ -30,7 +30,7 @@ const PictureCard = forwardRef(function PictureCard(
               {title}
             </h4>
             <div className="opacity-70 uppercase text-xs tracking-wider">
-              {new Date(date).toISOString().split("T")[0]}
+              {date && new Date(date).toISOString().split("T")[0]}
             </div>
             <div className="mt-2 uppercase text-xs font-semibold tracking-wider">
               {location}

@@ -24,8 +24,6 @@ const Upload: FC = () => {
       formData.append(event.target.name, file);
     });
     formData.append(event.target.files[0].name, event.target.files[0]);
-    console.log(event.target.files);
-    console.log(formData);
   };
 
   return (
