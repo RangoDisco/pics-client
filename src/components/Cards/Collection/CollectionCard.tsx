@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, useEffect } from "react";
 import { ICollection, IPicture } from "../../../contexts/Pictures/types";
-import { FaSpotify } from "react-icons/fa";
 import SpotifyLogoLink from "../../SpotifyLogoLink";
 
 const CollectionCard: FC<ICollection> = ({
@@ -15,11 +14,6 @@ const CollectionCard: FC<ICollection> = ({
   description,
   tags,
 }: ICollection) => {
-  const handleSpotifyClick = (event: React.MouseEvent<SVGElement>) => {
-    event.stopPropagation();
-    window.open(musicLink, "_blank");
-  };
-
   return (
     <Link href={`/collections/${id}`} passHref>
       <article className="w-full h-96 transition-colors duration-200 hover:cursor-pointer overflow-hidden">
@@ -40,7 +34,7 @@ const CollectionCard: FC<ICollection> = ({
                     key={index}
                   >
                     <Image
-                      src={`http://localhost:4000/${picture.contentUrl}`}
+                      src={`${process.env.HOST_API}/${picture.contentUrl}`}
                       alt="random image"
                       layout="fill"
                       objectFit="cover"

@@ -28,12 +28,12 @@ const FullPicture: FC = () => {
         {picture && !isLoading ? (
           <div className="p-4 w-full h-full">
             <a
-              href={`http://localhost:4000/${picture.contentUrl}`}
+              href={`${process.env.HOST_API}/${picture.contentUrl}`}
               target="_blank"
               rel="noreferrer"
             >
               <Image
-                src={`http://localhost:4000/${picture.contentUrl}`}
+                src={`${process.env.HOST_API}/${picture.contentUrl}`}
                 alt="picture"
                 layout="fill"
                 objectFit="contain"

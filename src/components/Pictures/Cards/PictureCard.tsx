@@ -18,7 +18,7 @@ const PictureCard = forwardRef(function PictureCard(
       <article className="w-full h-96 bg-raisinBlack transition-colors duration-200 hover:cursor-pointer overflow-hidden shadow-lg rounded-md">
         <div className="w-full h-3/4 transition:all duration-500 hover:h-full relative hover:mb-5">
           <Image
-            src={`http://localhost:4000/${url}`}
+            src={`${process.env.HOST_API}/${url}`}
             alt={title}
             layout="fill"
             objectFit="cover"

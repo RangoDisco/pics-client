@@ -1,0 +1,17 @@
+name: push-procedure
+
+on:
+  push:
+    branches:
+      - "*"
+
+jobs:
+  push-procedure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: yarn
+      - name: Check lint
+        uses: yarn eslint

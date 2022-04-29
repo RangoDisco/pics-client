@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // dotenv.config();
 
   const httpLink = createHttpLink({
-    uri: "http://127.0.0.1:4000/graphql",
+    uri: `${process.env.HOST_API}/graphql`,
     credentials: "same-origin",
   });
   const authLink = setContext((_, { headers }) => {

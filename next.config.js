@@ -8,6 +8,9 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  env: {
+    HOST_API: process.env.HOST_API,
+  },
 };
 
 module.exports = nextConfig;
