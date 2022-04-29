@@ -46,9 +46,14 @@ const AuthProvider = (props: IProps) => {
   };
 
   const fetchCurrentUser = useCallback(async () => {
-    const userRes = await execWhoAmI();
-    setCurrentUser(userRes.data.getSignedInUser);
-    return userRes;
+    try {
+      const userRes = await execWhoAmI();
+      setCurrentUser(userRes.data?.getSignedInUser);
+      return userRes;
+    } catch (error) {
+      localStorage.removeItem("token");
+      setIsConnected(false);
+    }
   }, [execWhoAmI]);
 
   useEffect(() => {
