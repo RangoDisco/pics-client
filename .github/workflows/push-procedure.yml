@@ -14,4 +14,4 @@ jobs:
       - name: Install dependencies
         uses: yarn
       - name: Check lint
-        uses: yarn eslint
+        uses: yarn lint
