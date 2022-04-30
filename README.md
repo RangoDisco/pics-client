@@ -1,26 +1,18 @@
 ## 1. Clone the project
 
-</br>
-
 ## 2. Install dependencies:
 
 ```bash
 yarn
 ```
 
-</br>
-
-## 3. add .env variables for HOST_API
-
-</br>
+## 3. Add .env variables for HOST_API
 
 ## 4. Run project:
 
 ```bash
 yarn dev
 ```
-
-</br>
 
 ## 5. Open in browser:
 
