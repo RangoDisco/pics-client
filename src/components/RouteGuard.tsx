@@ -38,7 +38,7 @@ function RouteGuard({ children }: any) {
       setAuthorized(true);
     } else if (localStorage.getItem("token")) {
       const res = await fetchCurrentUser();
-      const user = res.data?.getSignedInUser;
+      const user = res?.data?.getSignedInUser;
       if (!user || (adminPaths.includes(path) && user?.role !== "Admin")) {
         setAuthorized(false);
         router.push("/signin");
