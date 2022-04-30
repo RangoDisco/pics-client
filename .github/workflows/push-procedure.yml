@@ -12,6 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
-        uses: yarn
+        run: yarn
       - name: Check lint
-        uses: yarn lint
+        run: yarn lint
