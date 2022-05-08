@@ -27,4 +27,4 @@ jobs:
           context: ./
           push: true
           tags: rangodisco/picclient:latest
-          file: ./dev.dockerfile
+          file: ./prod.dockerfile
