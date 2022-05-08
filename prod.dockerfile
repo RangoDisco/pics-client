@@ -4,7 +4,7 @@ COPY package.json ./
 RUN yarn
 
 COPY .env ./
-COPY ts.config.json ./
+COPY tsconfig.json ./
 COPY next.config.js ./
 COPY postcss.config.js ./
 COPY tailwind.config.js ./
