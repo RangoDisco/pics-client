@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 WORKDIR /app
-COPY package.jsn ./
+COPY package.json ./
 RUN yarn
 
 COPY .env ./
