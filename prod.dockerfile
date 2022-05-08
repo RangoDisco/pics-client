@@ -3,6 +3,8 @@ WORKDIR /app
 COPY package.json ./
 RUN yarn
 
+EXPOSE 3000
+
 COPY .env ./
 COPY tsconfig.json ./
 COPY next.config.js ./
