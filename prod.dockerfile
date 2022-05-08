@@ -1,16 +1,17 @@
 FROM node:lts-alpine
-WORKDIR /app
+
+WORKDIR /usr/app
+
 COPY package.json ./
+
 RUN yarn
+
+COPY ./ ./
+
+RUN yarn run build
 
 EXPOSE 3000
 
-COPY .env ./
-COPY tsconfig.json ./
-COPY next.config.js ./
-COPY postcss.config.js ./
-COPY tailwind.config.js ./
-COPY src src
-COPY public public
+USER node
 
-CMD yarn build && yarn start
+CMD ["yarn", "start"]
