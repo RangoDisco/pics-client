@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC, forwardRef, useEffect } from "react";
+import { forwardRef } from "react";
 
 export interface IProps {
   id: number;
@@ -9,17 +9,20 @@ export interface IProps {
   date: Date;
   location: string;
 }
-const PictureCard = forwardRef(function PictureCard(
-  { id, title, url, date, location }: IProps,
-  ref
-) {
+const PictureCard = forwardRef(function PictureCard({
+  id,
+  title,
+  url,
+  date,
+  location,
+}: IProps) {
   return (
     <Link href={`/pictures/${id}`} passHref>
       <article className="w-full h-96 bg-raisinBlack transition-colors duration-200 hover:cursor-pointer overflow-hidden shadow-lg rounded-md">
         <div className="w-full h-3/4 transition:all duration-500 hover:h-full relative hover:mb-5">
           <Image src={`${url}`} alt={title} layout="fill" objectFit="cover" />
         </div>
-        <div className="-mt-5 relative z-30">
+        <div className="relative z-30">
           <div className="bg-raisinBlack p-6">
             <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate text-munsellBlue">
               {title}
