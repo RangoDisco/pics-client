@@ -8,6 +8,7 @@ export interface IPicturesContext {
   collectionsTotalCount: number;
   collection: ICollection | null;
   isLoading: boolean;
+  error: string;
   fetchPictures: (
     first: number,
     after: number,

@@ -1,3 +1,4 @@
+import { ThreeBody } from "@uiball/loaders";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
@@ -9,7 +10,7 @@ import { usePics } from "../../contexts/Pictures/PicturesProvider";
 const Collection: FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { collection, fetchCollectionById } = usePics();
+  const { collection, fetchCollectionById, error } = usePics();
 
   useEffect(() => {
     (async () => id && (await fetchCollectionById(+id)))();
@@ -22,7 +23,8 @@ const Collection: FC = () => {
         <meta name="description" content="Page photos" />
       </Head>
       <div className="bg-richBlack text-ghostWhite">
-        {collection && (
+        {error && <h2 className="p-4 text-center text-red">{error}</h2>}
+        {collection ? (
           <>
             <div className="p-4 flex justify-between">
               <h4>{collection.title}</h4>
@@ -30,6 +32,10 @@ const Collection: FC = () => {
             </div>
             <PicturesList pictures={collection?.pictures} />
           </>
+        ) : (
+          <div className="flex justify-center items-center h-full">
+            <ThreeBody size={35} speed={1.1} color="white" />
+          </div>
         )}
       </div>
     </>

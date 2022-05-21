@@ -8,7 +8,7 @@ import { ThreeBody } from "@uiball/loaders";
 const FullPicture: FC = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { picture, fetchPictureById, isLoading, fetchRandomPicture } =
+  const { picture, fetchPictureById, isLoading, error, fetchRandomPicture } =
     usePics();
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const FullPicture: FC = () => {
         <meta name="description" content="Page photo" />
       </Head>
       <section className="bg-richBlack h-screen">
+        {error && <h2 className="p-4 text-center text-red">{error}</h2>}
         {picture && !isLoading ? (
           <div className="p-4 w-full h-full">
             <a href={`${picture.contentUrl}`} target="_blank" rel="noreferrer">

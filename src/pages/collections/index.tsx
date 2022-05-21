@@ -7,8 +7,13 @@ import { usePics } from "../../contexts/Pictures/PicturesProvider";
 import { ICollection } from "../../contexts/Pictures/types";
 
 const Collections: FC = () => {
-  const { collections, collectionsTotalCount, fetchCollections, isLoading } =
-    usePics();
+  const {
+    collections,
+    collectionsTotalCount,
+    fetchCollections,
+    isLoading,
+    error,
+  } = usePics();
 
   useEffect(() => {
     (async () => await fetchCollections(20, 0, []))();
@@ -21,6 +26,7 @@ const Collections: FC = () => {
         <meta name="description" content="Page collections" />
       </Head>
       <div className="bg-richBlack text-ghostWhite">
+        {error && <h2 className="p-4 text-center text-red">{error}</h2>}
         <InfiniteScroll
           pageStart={0}
           loadMore={() => {
