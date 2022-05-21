@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com", "localhost"],
+    domains: [
+      "images.unsplash.com",
+      "localhost",
+      "api.dev.pics.maxime-dias.fr",
+    ],
   },
   i18n: {
     locales: ["en"],
@@ -10,6 +14,9 @@ const nextConfig = {
   },
   env: {
     HOST_API: process.env.HOST_API,
+  },
+  experimental: {
+    outputStandalone: true,
   },
 };
 
