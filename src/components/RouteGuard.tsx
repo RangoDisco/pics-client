@@ -7,7 +7,7 @@ export { RouteGuard };
 function RouteGuard({ children }: any) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
-  const { fetchCurrentUser, currentUser } = useAuth();
+  const { fetchCurrentUser } = useAuth();
 
   useEffect(() => {
     // on initial load - run auth check
