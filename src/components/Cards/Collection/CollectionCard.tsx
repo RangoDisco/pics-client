@@ -34,7 +34,7 @@ const CollectionCard: FC<ICollection> = ({
                     key={index}
                   >
                     <Image
-                      src={`${process.env.HOST_API}/${picture.contentUrl}`}
+                      src={`${picture.contentUrl}`}
                       alt="random image"
                       layout="fill"
                       objectFit="cover"

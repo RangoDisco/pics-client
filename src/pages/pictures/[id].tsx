@@ -3,6 +3,7 @@ import { FC, useEffect } from "react";
 import Image from "next/image";
 import { usePics } from "../../contexts/Pictures/PicturesProvider";
 import Head from "next/head";
+import { ThreeBody } from "@uiball/loaders";
 
 const FullPicture: FC = () => {
   const router = useRouter();
@@ -27,13 +28,9 @@ const FullPicture: FC = () => {
       <section className="bg-richBlack h-screen">
         {picture && !isLoading ? (
           <div className="p-4 w-full h-full">
-            <a
-              href={`${process.env.HOST_API}/${picture.contentUrl}`}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={`${picture.contentUrl}`} target="_blank" rel="noreferrer">
               <Image
-                src={`${process.env.HOST_API}/${picture.contentUrl}`}
+                src={`${picture.contentUrl}`}
                 alt="picture"
                 layout="fill"
                 objectFit="contain"
@@ -41,8 +38,8 @@ const FullPicture: FC = () => {
             </a>
           </div>
         ) : (
-          <div className="flex justify-center items-center bg-richBlack h-full">
-            <p className="animate-spin">Siu</p>
+          <div className="flex justify-center items-center h-full">
+            <ThreeBody size={35} speed={1.1} color="white" />
           </div>
         )}
       </section>

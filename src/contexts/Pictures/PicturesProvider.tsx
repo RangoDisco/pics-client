@@ -61,6 +61,7 @@ const PicturesProvider = (props: IProps) => {
   const fetchPictureById = useCallback(
     async (pictureId: number) => {
       setIsLoading(true);
+      console.log(pictureId);
       try {
         const res = await execFindOne({ variables: { id: pictureId } });
         setPicture(res.data.picture);
