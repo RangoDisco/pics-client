@@ -4,7 +4,6 @@ import {
   ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import {
@@ -31,6 +30,7 @@ const PicturesProvider = (props: IProps) => {
   const [collection, setCollection] = useState<ICollection | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const [execFindAll] = useLazyQuery(FETCHPICTURES);
   const [execFindOne] = useLazyQuery(FETCHPICTUREBYID);
@@ -40,6 +40,7 @@ const PicturesProvider = (props: IProps) => {
 
   const fetchPictures = useCallback(
     async (first: number, after: number, exPics: IPicture[]) => {
+      setError("");
       setIsLoading(true);
       try {
         const res = await execFindAll({
@@ -50,7 +51,7 @@ const PicturesProvider = (props: IProps) => {
           : setPictures(res.data.picturesPage.pictures);
         setPicturesTotalCount(res.data.picturesPage.totalCount);
       } catch (error) {
-        console.log(error);
+        setError("An error occurred: Unable to fetch pictures");
       } finally {
         setIsLoading(false);
       }
@@ -60,12 +61,13 @@ const PicturesProvider = (props: IProps) => {
 
   const fetchPictureById = useCallback(
     async (pictureId: number) => {
+      setError("");
       setIsLoading(true);
       try {
         const res = await execFindOne({ variables: { id: pictureId } });
         setPicture(res.data.picture);
       } catch (error) {
-        console.log(error);
+        setError("An error occurred: Unable to fetch picture");
       } finally {
         setIsLoading(false);
       }
@@ -74,12 +76,13 @@ const PicturesProvider = (props: IProps) => {
   );
 
   const fetchRandomPicture = useCallback(async () => {
+    setError("");
     setIsLoading(true);
     try {
       const res = await execFindRandom();
       setPicture(res.data.pictureRandom);
     } catch (error) {
-      console.log(error);
+      setError("An error occurred: Unable to fetch picture");
     } finally {
       setIsLoading(false);
     }
@@ -87,6 +90,7 @@ const PicturesProvider = (props: IProps) => {
 
   const fetchCollections = useCallback(
     async (first: number, after: number, exColls: ICollection[]) => {
+      setError("");
       setIsLoading(true);
       try {
         const res = await execFindCollections({
@@ -100,7 +104,7 @@ const PicturesProvider = (props: IProps) => {
           : setCollections(res.data.collectionsPage.collections);
         setCollectionsTotalCount(res.data.collectionsPage.totalCount);
       } catch (error) {
-        console.log(error);
+        setError("An error occurred: Unable to fetch collections");
       } finally {
         setIsLoading(false);
       }
@@ -110,6 +114,7 @@ const PicturesProvider = (props: IProps) => {
 
   const fetchCollectionById = useCallback(
     async (collectionId: number) => {
+      setError("");
       setIsLoading(true);
       try {
         const res = await execFindCollectionById({
@@ -117,7 +122,7 @@ const PicturesProvider = (props: IProps) => {
         });
         setCollection(res.data.collection);
       } catch (error) {
-        console.log(error);
+        setError("An error occurred: Unable to fetch collections");
       } finally {
         setIsLoading(false);
       }
@@ -133,6 +138,7 @@ const PicturesProvider = (props: IProps) => {
     collectionsTotalCount,
     collection,
     isLoading,
+    error,
     fetchPictures,
     fetchPictureById,
     fetchRandomPicture,

@@ -7,7 +7,6 @@ export const FETCHPICTURES = gql`
     ) {
       pictures {
         id
-        title
         contentUrl
         location
         date
@@ -26,7 +25,6 @@ export const FETCHPICTUREBYID = gql`
   query findOne($id: Int!) {
     picture(filterPictureInput: { id: $id }) {
       id
-      title
       contentUrl
       location
       date
@@ -39,7 +37,6 @@ export const FETCHRANDOMPICTURE = gql`
   query findRandom {
     pictureRandom {
       id
-      title
       contentUrl
       location
       date
@@ -68,7 +65,6 @@ export const FETCHCOLLECTIONS = gql`
         }
         pictures {
           id
-          title
           contentUrl
         }
         musicLink
@@ -96,7 +92,6 @@ export const FETCHCOLLECTIONBYID = gql`
       }
       pictures {
         id
-        title
         contentUrl
         date
         location

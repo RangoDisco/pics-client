@@ -6,8 +6,4 @@ services:
       context: ./
       dockerfile: dev.dockerfile
     ports:
-      - 3000:3000
-    command: yarn dev
-    volumes:
-      - ./src/app/src
-      - ./public:/app/public
+      - ${APP_PORT}:3000

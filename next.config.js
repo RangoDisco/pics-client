@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["images.unsplash.com", "localhost"],
+    domains: ["localhost", "picnicstorage.fra1.digitaloceanspaces.com"],
   },
   i18n: {
     locales: ["en"],
@@ -10,6 +10,9 @@ const nextConfig = {
   },
   env: {
     HOST_API: process.env.HOST_API,
+  },
+  experimental: {
+    outputStandalone: true,
   },
 };
 
