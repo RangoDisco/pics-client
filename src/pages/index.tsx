@@ -2,9 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 import { useEffect } from "react";
-import PictureCard from "../components/Pictures/Cards/PictureCard";
-import PictureSkeleton from "../components/Pictures/Cards/PictureSkeleton";
-
 import { usePics } from "../contexts/Pictures/PicturesProvider";
 import InfiniteScroll from "react-infinite-scroller";
 import PicturesList from "../components/Pictures/PicturesList";
