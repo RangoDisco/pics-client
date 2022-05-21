@@ -11,6 +11,9 @@ const nextConfig = {
   env: {
     HOST_API: process.env.HOST_API,
   },
+  experimental: {
+    outputStandalone: true,
+  },
 };
 
 module.exports = nextConfig;
