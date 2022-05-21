@@ -2,11 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "images.unsplash.com",
-      "localhost",
-      "api.dev.pics.maxime-dias.fr",
-    ],
+    domains: ["localhost", "picnicstorage.fra1.digitaloceanspaces.com"],
   },
   i18n: {
     locales: ["en"],
