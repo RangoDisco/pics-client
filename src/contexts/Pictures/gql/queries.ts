@@ -65,7 +65,6 @@ export const FETCHCOLLECTIONS = gql`
         }
         pictures {
           id
-          title
           contentUrl
         }
         musicLink
@@ -93,7 +92,6 @@ export const FETCHCOLLECTIONBYID = gql`
       }
       pictures {
         id
-        title
         contentUrl
         date
         location
