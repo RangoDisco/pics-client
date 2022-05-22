@@ -9,13 +9,10 @@ export interface IProps {
   date: Date;
   location: string;
 }
-const PictureCard = forwardRef(function PictureCard({
-  id,
-  title,
-  url,
-  date,
-  location,
-}: IProps) {
+const PictureCard = forwardRef(function PictureCard(
+  { id, title, url, date, location }: IProps,
+  ref
+) {
   return (
     <Link href={`/pictures/${id}`} passHref>
       <article className="w-full h-96 bg-raisinBlack transition-colors duration-200 hover:cursor-pointer overflow-hidden shadow-lg rounded-md">

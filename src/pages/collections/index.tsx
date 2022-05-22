@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { FC, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import CollectionCard from "../../components/Cards/Collection/CollectionCard";
-import CollectionSkeleton from "../../components/Cards/Collection/CollectionSkeleton";
+import CollectionCard from "../../components/Collection/Cards/CollectionCard";
+import CollectionSkeleton from "../../components/Collection/Cards/CollectionSkeleton";
 import { usePics } from "../../contexts/Pictures/PicturesProvider";
 import { ICollection } from "../../contexts/Pictures/types";
 
