@@ -12,11 +12,8 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import PicturesProvider from "../contexts/Pictures/PicturesProvider";
 import { RouteGuard } from "../components/RouteGuard";
-// import * as dotenv from "dotenv";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // dotenv.config();
-
   const httpLink = createHttpLink({
     uri: `${process.env.HOST_API}/graphql`,
     credentials: "same-origin",
