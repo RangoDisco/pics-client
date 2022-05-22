@@ -27,13 +27,12 @@ const SignIn: FC = () => {
         <title>Pic-Nic Login</title>
         <meta name="description" content="Page photos" />
       </Head>
-      <div style={{ minHeight: "100vh" }}>
+      <div className="h-screen flex justify-center items-center">
         <form
-          className="flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
-          style={{ height: "100vh" }}
+          className="h-fit lg:w-1/4 md:w-1/2 bg-richBlack text-ghostWhite"
           onSubmit={handleFormSubmit}
         >
-          <div className="w-1/4 flex flex-col">
+          <div className="flex flex-col">
             <TextInput
               label="username"
               type="text"
@@ -42,7 +41,7 @@ const SignIn: FC = () => {
               required={true}
             />
           </div>
-          <div className="w-1/4 flex flex-col mt-8">
+          <div className="flex flex-col mt-8">
             <TextInput
               label="password"
               type="password"
@@ -50,11 +49,13 @@ const SignIn: FC = () => {
               setValue={setPassword}
               required={true}
             />
-            {error && <p className="mt-2">{error}</p>}
+          </div>
+          {error && <p className="mt-2">{error}</p>}
+          <div className="mt-16 flex justify-center">
             <button
               disabled={!isFormValid || isLoading}
               type="submit"
-              className={`mt-16 w-1/2 self-center bg-munsellBlue rounded-full p-2 transition:colors duration-200 ${
+              className={`w-full lg:w-1/2 self-center bg-munsellBlue rounded-full p-2 transition:colors duration-200 ${
                 (!isFormValid || isLoading) && "opacity-25"
               }`}
             >
