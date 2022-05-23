@@ -8,7 +8,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar/NavBar";
 import Footer from "../components/Footer";
 import PicturesProvider from "../contexts/Pictures/PicturesProvider";
 import { RouteGuard } from "../components/RouteGuard";

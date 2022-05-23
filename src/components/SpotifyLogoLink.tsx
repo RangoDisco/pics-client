@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { FaSpotify } from "react-icons/fa";
+import { RiSpotifyFill } from "react-icons/ri";
 
 interface IProps {
   size: number;
@@ -12,7 +12,7 @@ const SpotifyLogoLink: FC<IProps> = ({ size, musicLink }: IProps) => {
     window.open(musicLink, "_blank");
   };
   return (
-    <FaSpotify
+    <RiSpotifyFill
       size={size}
       className="cursor-pointer hover:text-munsellBlue"
       onClick={handleSpotifyClick}
