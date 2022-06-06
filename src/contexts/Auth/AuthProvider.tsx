@@ -1,4 +1,5 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { removeCookies, setCookies } from "cookies-next";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { IUser } from "../Users/types";
@@ -28,7 +29,7 @@ const AuthProvider = (props: IProps) => {
         },
       });
       if (res.data.login) {
-        localStorage.setItem("token", res.data.login.access_token);
+        setCookies("token", res.data.login.access_token);
         await fetchCurrentUser();
       } else {
         setError("Your email or your password is incorrect");
@@ -41,7 +42,7 @@ const AuthProvider = (props: IProps) => {
   };
 
   const signOut = () => {
-    localStorage.removeItem("token");
+    removeCookies("token");
     setIsConnected(false);
   };
 
@@ -51,7 +52,7 @@ const AuthProvider = (props: IProps) => {
       setCurrentUser(userRes.data?.getSignedInUser);
       return userRes;
     } catch (error) {
-      localStorage.removeItem("token");
+      removeCookies("token");
       setIsConnected(false);
     }
   }, [execWhoAmI]);
