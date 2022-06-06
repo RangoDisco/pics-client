@@ -1,12 +1,8 @@
-import { createHttpLink } from "@apollo/client";
+import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { getCookie } from "cookies-next";
+import { checkCookies, getCookie } from "cookies-next";
 
-export const httpLink = createHttpLink({
-  uri: `${process.env.HOST_API}/graphql`,
-  credentials: "same-origin",
-});
-export const createAuthLink = ({ req }) => {
+export const createApolloClient = ({ req }) => {
   const token = getCookie("token", { req });
   const authLink = setContext((_, { headers }) => {
     return {
@@ -18,5 +14,33 @@ export const createAuthLink = ({ req }) => {
       },
     };
   });
-  return authLink;
+
+  const httpLink = createHttpLink({
+    uri: `${process.env.HOST_API}/graphql`,
+    credentials: "same-origin",
+  });
+
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+};
+
+export const execQuery = async (query, variables, { req }) => {
+  const client = createApolloClient({ req });
+
+  if (!checkCookies("token", { req })) {
+    throw new Error("No token");
+  }
+
+  const res = await client.query({
+    query: query,
+    ...(variables && {
+      variables: {
+        ...variables,
+      },
+    }),
+  });
+
+  return res;
 };

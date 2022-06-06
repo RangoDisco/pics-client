@@ -8,7 +8,7 @@ import PicturesList from "../components/Pictures/PicturesList";
 import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { createAuthLink, httpLink } from "../../graphqlClient";
+import { createAuthLink, execQuery, httpLink } from "../../graphqlClient";
 import { useRouter } from "next/router";
 import { checkCookies } from "cookies-next";
 
@@ -71,24 +71,12 @@ const Home: NextPage<IProps> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  const authLink = createAuthLink({ req });
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
-
-  if (!checkCookies("token", { req })) {
-    throw new Error("No token");
-  }
-
   try {
-    const res = await client.query({
-      query: FETCHPICTURES,
-      variables: {
-        first: 20,
-        after: 0,
-      },
-    });
+    const res = await execQuery(
+      FETCHPICTURES,
+      { first: 20, after: 0 },
+      { req }
+    );
 
     return {
       props: {
@@ -99,7 +87,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   } catch (error) {
     return {
       props: {
-        ssrError: "An error occured",
+        ssrError: String(error),
       },
     };
   }

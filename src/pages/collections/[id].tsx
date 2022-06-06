@@ -1,11 +1,8 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { ThreeBody } from "@uiball/loaders";
-import { checkCookies, getCookie } from "cookies-next";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
-import { createAuthLink, httpLink } from "../../../graphqlClient";
+import { execQuery } from "../../../graphqlClient";
 import PicturesList from "../../components/Pictures/PicturesList";
 import SpotifyLogoLink from "../../components/SpotifyLogoLink";
 import { FETCHCOLLECTIONBYID } from "../../contexts/Pictures/gql/queries";
@@ -57,22 +54,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   params,
 }) => {
-  const authLink = createAuthLink({ req });
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
-  });
-
   try {
-    if (!checkCookies("token", { req })) {
-      throw new Error("No token");
-    }
-    const res = await client.query({
-      query: FETCHCOLLECTIONBYID,
-      variables: {
-        id: Number(params?.id),
-      },
-    });
+    const res = await execQuery(
+      FETCHCOLLECTIONBYID,
+      { id: Number(params?.id) },
+      { req }
+    );
+
     return {
       props: {
         collection: res.data.collection,
