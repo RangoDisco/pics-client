@@ -39,17 +39,17 @@ const PicturesProvider = (props: IProps) => {
   const [execFindRandom] = useLazyQuery(FETCHRANDOMPICTURE);
 
   const fetchPictures = useCallback(
-    async (first: number, after: number, exPics: IPicture[]) => {
+    async (first: number, after: number) => {
       setError("");
       setIsLoading(true);
       try {
         const res = await execFindAll({
           variables: { first, after },
         });
-        exPics.length > 0
-          ? setPictures([...exPics, ...res.data.picturesPage.pictures])
-          : setPictures(res.data.picturesPage.pictures);
-        setPicturesTotalCount(res.data.picturesPage.totalCount);
+        return {
+          pictures: res.data.picturesPage.pictures,
+          picturesTotalCount: res.data.picturesPage.totalCount,
+        };
       } catch (error) {
         setError("An error occurred: Unable to fetch pictures");
       } finally {

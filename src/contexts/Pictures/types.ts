@@ -11,9 +11,10 @@ export interface IPicturesContext {
   error: string;
   fetchPictures: (
     first: number,
-    after: number,
-    exPics: IPicture[]
-  ) => Promise<void>;
+    after: number
+  ) => Promise<
+    { pictures: IPicture[]; picturesTotalCount: number } | undefined
+  >;
   fetchPictureById: (id: number) => Promise<void>;
   fetchRandomPicture: () => Promise<void>;
   fetchCollections: (
