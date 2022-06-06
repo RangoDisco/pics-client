@@ -7,8 +7,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import PicturesList from "../components/Pictures/PicturesList";
 import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { createAuthLink, execQuery, httpLink } from "../../graphqlClient";
+import { execQuery } from "../../graphqlClient";
 import { useRouter } from "next/router";
 import { checkCookies } from "cookies-next";
 
