@@ -24,7 +24,7 @@ const CollectionCard: FC<ICollection> = ({
               (picture: IPicture, index: number) =>
                 index < 3 && (
                   <div
-                    className={`w-1/3 h-full relative border border-solid border-raisinBlack rounded-lg ${
+                    className={`w-1/3 h-full relative border border-solid border-silkAccent dark:border-raisinBlack rounded-lg ${
                       index === 0
                         ? "z-0 mt-5"
                         : index === 1
@@ -51,9 +51,9 @@ const CollectionCard: FC<ICollection> = ({
             )}
         </div>
         <div className="px-4 -mt-20 relative z-30">
-          <div className="bg-raisinBlack p-6 rounded-lg shadow-lg">
+          <div className="bg-silkAccent dark:bg-raisinBlack p-6 rounded-lg shadow-lg">
             <div className="flex items-baseline">
-              <span className="bg-munsellBlue text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
+              <span className="bg-rose dark:bg-munsellBlue text-ghostWhite text-xs px-2 inline-block rounded-full uppercase font-semibold tracking-wide">
                 {category.title}
               </span>
               {tags &&

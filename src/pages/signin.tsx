@@ -29,7 +29,7 @@ const SignIn: FC = () => {
       </Head>
       <div className="h-screen flex justify-center items-center">
         <form
-          className="h-fit lg:w-1/4 md:w-1/2 bg-richBlack text-ghostWhite"
+          className="h-fit lg:w-1/4 md:w-1/2 bg-silk dark:bg-richBlack text-rose dark:text-ghostWhite"
           onSubmit={handleFormSubmit}
         >
           <div className="flex flex-col">
@@ -55,7 +55,7 @@ const SignIn: FC = () => {
             <button
               disabled={!isFormValid || isLoading}
               type="submit"
-              className={`w-full lg:w-1/2 self-center bg-munsellBlue rounded-full p-2 transition:colors duration-200 ${
+              className={`w-full lg:w-1/2 self-center bg-rose dark:bg-munsellBlue rounded-full p-2 transition:colors duration-200 text-ghostWhite ${
                 (!isFormValid || isLoading) && "opacity-25"
               }`}
             >

@@ -23,7 +23,7 @@ const Collections: FC = () => {
         <title>Pic-Nic Collections</title>
         <meta name="description" content="Page collections" />
       </Head>
-      <div className="bg-richBlack text-ghostWhite">
+      <div className="bg-silk dark:bg-richBlack text-richBlack dark:text-ghostWhite">
         {error && <h2 className="p-4 text-center text-red">{error}</h2>}
         <InfiniteScroll
           pageStart={0}
