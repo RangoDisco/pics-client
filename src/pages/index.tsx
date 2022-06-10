@@ -9,7 +9,6 @@ import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
 import { execQuery } from "../../graphqlClient";
 import { useRouter } from "next/router";
-import { checkCookies } from "cookies-next";
 
 interface IProps {
   ssrPictures: IPicture[];
@@ -51,7 +50,7 @@ const Home: NextPage<IProps> = ({
         <title>Pic-Nic Photos</title>
         <meta name="description" content="Page photos" />
       </Head>
-      <div className="bg-richBlack text-ghostWhite">
+      <div className="bg-silk dark:bg-richBlack text-richBlack dark:text-ghostWhite">
         {error && <h2 className="p-4 text-center text-red">{error}</h2>}
         <InfiniteScroll
           pageStart={0}

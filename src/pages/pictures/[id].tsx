@@ -29,7 +29,7 @@ const FullPicture: FC<IProps> = ({ picture, error }: IProps) => {
         <title>Pic-Nic {picture?.title || "photo"}</title>
         <meta name="description" content="Page photo" />
       </Head>
-      <section className="bg-richBlack h-screen">
+      <section className="bg-silk dark:bg-richBlack h-screen">
         {error && (
           <h2 className="p-4 text-center text-red">
             {error && "An error occurred"}

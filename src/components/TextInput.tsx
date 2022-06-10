@@ -15,7 +15,7 @@ const TextInput: FC<IProps> = ({
 }: IProps) => {
   return (
     <>
-      <label htmlFor={label} className="textMunsellBlue self-start">
+      <label htmlFor={label} className="self-start">
         {`${label.charAt(0).toUpperCase()}${label.slice(1)}`}
       </label>
       <input
@@ -25,7 +25,7 @@ const TextInput: FC<IProps> = ({
         type={type}
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        className="mt shadow border-b bg-richBlack transition-color duration-200 border-ghostWhite outline-none focus:border-b-munsellBlue"
+        className="mt border-b bg-silk dark:bg-richBlack transition-color duration-200 border-richBlack dark:border-ghostWhite outline-none focus:border-b-rose dark:focus:border-b-munsellBlue outline:none"
       />
     </>
   );

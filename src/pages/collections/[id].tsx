@@ -28,7 +28,7 @@ const Collection: FC<IProps> = ({ collection, error }: IProps) => {
         <title>Pic-Nic {collection?.title || "collection"}</title>
         <meta name="description" content="Page photos" />
       </Head>
-      <div className="bg-richBlack text-ghostWhite">
+      <div className="bg-silk dark:bg-richBlack text-richBlack dark:text-ghostWhite">
         {error && (
           <h2 className="p-4 text-center text-red">
             {error && "An error occurred"}

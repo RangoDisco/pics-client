@@ -14,7 +14,7 @@ const SpotifyLogoLink: FC<IProps> = ({ size, musicLink }: IProps) => {
   return (
     <RiSpotifyFill
       size={size}
-      className="cursor-pointer hover:text-munsellBlue"
+      className="cursor-pointer hover:text-rose dark:hover:text-munsellBlue"
       onClick={handleSpotifyClick}
     />
   );
