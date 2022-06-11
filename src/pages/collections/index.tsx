@@ -62,7 +62,11 @@ const Collections: NextPage<IProps> = ({
           }}
           hasMore={collectionsTotalCount > collections?.length}
         >
-          <CollectionsList collections={collections} />
+          <CollectionsList
+            collections={
+              collections.length === 0 ? ssrCollections : collections
+            }
+          />
         </InfiniteScroll>
       </div>
     </>

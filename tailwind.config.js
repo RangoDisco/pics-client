@@ -18,8 +18,8 @@ module.exports = {
       red: "#FF1F1F",
 
       // Light theme
-      silk: "#F0E9E2",
-      silkAccent: "#F9F4DE",
+      silk: "#FCF9EE",
+      creme: "#F9F4DE",
       rose: "#D5869C",
     },
     extend: {},

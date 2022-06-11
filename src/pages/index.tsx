@@ -61,7 +61,9 @@ const Home: NextPage<IProps> = ({
           }}
           hasMore={picturesTotalCount > pictures?.length}
         >
-          <PicturesList pictures={pictures} />
+          <PicturesList
+            pictures={pictures.length === 0 ? ssrPictures : pictures}
+          />
         </InfiniteScroll>
       </div>
     </>

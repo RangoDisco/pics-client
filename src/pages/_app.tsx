@@ -26,7 +26,6 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Credentials": true,
       Authorization: token ? `Bearer ${token}` : "",
     },
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isLoading, setIsLoading] = useState(false);
   const start = () => setIsLoading(true);
   const end = () => setIsLoading(false);
-  const { setTheme } = useTheme();
 
   useEffect(() => {
     router.events.on("routeChangeStart", start);
@@ -51,18 +49,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     router.events.on("routeChangeError", end);
   }, [router]);
 
-  useEffect(() => {
-    const chosenTheme = localStorage.getItem("chosenTheme");
-    if (chosenTheme) {
-      setTheme(chosenTheme);
-    } else {
-      setTheme("light");
-    }
-  }, [setTheme]);
-
   return (
     <ApolloProvider client={graphqlClient}>
-      <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class" defaultTheme="light">
         <AuthProvider>
           <PicturesProvider>
             <NavBar />
