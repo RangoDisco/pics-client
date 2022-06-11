@@ -89,20 +89,17 @@ const PicturesProvider = (props: IProps) => {
   }, [execFindRandom]);
 
   const fetchCollections = useCallback(
-    async (first: number, after: number, exColls: ICollection[]) => {
+    async (first: number, after: number) => {
       setError("");
       setIsLoading(true);
       try {
         const res = await execFindCollections({
           variables: { first, after },
         });
-        exColls.length > 0
-          ? setCollections([
-              ...exColls,
-              ...res.data.collectionsPage.collections,
-            ])
-          : setCollections(res.data.collectionsPage.collections);
-        setCollectionsTotalCount(res.data.collectionsPage.totalCount);
+        return {
+          collections: res.data.collectionsPage.collections,
+          collectionsTotalCount: res.data.collectionsPage.totalCount,
+        };
       } catch (error) {
         setError("An error occurred: Unable to fetch collections");
       } finally {

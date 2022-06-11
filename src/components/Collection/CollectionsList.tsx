@@ -10,7 +10,7 @@ interface IProps {
 const CollectionsList: FC<IProps> = ({ collections }: IProps) => {
   return (
     <section className="p-4 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
-      {collections && collections.length > 0
+      {collections.length > 0
         ? collections.map((collection: ICollection, index: number) => (
             <CollectionCard {...collection} key={`collection-${index}`} />
           ))
