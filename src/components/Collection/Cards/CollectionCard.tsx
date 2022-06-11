@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { ICollection, IPicture } from "../../../contexts/Pictures/types";
 import SpotifyLogoLink from "../../SpotifyLogoLink";
 

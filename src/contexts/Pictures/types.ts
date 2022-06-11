@@ -19,9 +19,10 @@ export interface IPicturesContext {
   fetchRandomPicture: () => Promise<void>;
   fetchCollections: (
     first: number,
-    after: number,
-    exColls: ICollection[]
-  ) => Promise<void>;
+    after: number
+  ) => Promise<
+    { collections: ICollection[]; collectionsTotalCount: number } | undefined
+  >;
   fetchCollectionById: (id: number) => Promise<void>;
 }
 export interface IPicture {
