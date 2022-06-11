@@ -29,7 +29,7 @@ const SignIn: FC = () => {
       </Head>
       <div className="h-screen flex justify-center items-center">
         <form
-          className="h-fit lg:w-1/4 md:w-1/2 bg-silk dark:bg-richBlack text-rose dark:text-ghostWhite"
+          className="h-fit lg:w-1/4 md:w-1/2 bg-silk dark:bg-richBlack text-richBlack dark:text-ghostWhite"
           onSubmit={handleFormSubmit}
         >
           <div className="flex flex-col">

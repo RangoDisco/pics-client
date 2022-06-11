@@ -15,7 +15,7 @@ const PictureCard = forwardRef(function PictureCard(
 ) {
   return (
     <Link href={`/pictures/${id}`} passHref>
-      <article className="w-full h-96 bg-silkAccent dark:bg-raisinBlack transition-colors duration-200 hover:cursor-pointer overflow-hidden shadow-lg rounded-md">
+      <article className="w-full h-96 bg-creme dark:bg-raisinBlack transition-colors duration-200 hover:cursor-pointer overflow-hidden shadow-lg rounded-md">
         <div className="w-full h-3/4 transition:all duration-500 hover:h-full relative hover:mb-5">
           <Image
             src={url}
@@ -25,7 +25,7 @@ const PictureCard = forwardRef(function PictureCard(
           />
         </div>
         <div className="relative z-30">
-          <div className="bg-silkAccent dark:bg-raisinBlack p-6">
+          <div className="bg-creme dark:bg-raisinBlack p-6">
             <h4 className="mt-1 text-xl font-semibold uppercase leading-tight truncate text-munsellBlue">
               {title}
             </h4>

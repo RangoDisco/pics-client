@@ -17,7 +17,7 @@ const NavButton: FC<IProps> = ({ title, pathName }: IProps) => {
   return (
     <Link href={pathName} passHref>
       <p
-        className={`transition:colors duration-200 hover:text-rose dark:hover:text-munsellBlue hover:cursor-pointer ${
+        className={`transition:colors duration-200 hover:text-rose dark:hover:text-munsellBlue cursor-pointer ${
           isCurrentPath && "text-rose dark:text-munsellBlue underline"
         }`}
       >

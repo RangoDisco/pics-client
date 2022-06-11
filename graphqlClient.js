@@ -8,7 +8,6 @@ export const createApolloClient = ({ req }) => {
     return {
       headers: {
         ...headers,
-        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true,
         Authorization: token ? `Bearer ${token}` : "",
       },
