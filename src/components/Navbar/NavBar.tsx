@@ -7,7 +7,6 @@ import {
   RiLogoutBoxRLine,
   RiMoonFill,
   RiSunFill,
-  RiContrast2Fill,
 } from "react-icons/ri";
 import { useAuth } from "../../contexts/Auth/AuthProvider";
 import NavButton from "./NavButton";

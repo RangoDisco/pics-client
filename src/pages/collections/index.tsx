@@ -83,7 +83,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       },
       { req }
     );
-    console.log(res);
     return {
       props: {
         ssrCollections: res.data.collectionsPage.collections,

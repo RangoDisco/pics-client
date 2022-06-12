@@ -27,7 +27,6 @@ export interface IPicturesContext {
 }
 export interface IPicture {
   id: number;
-  title: string;
   contentUrl: string;
   location: string;
   date: Date;
