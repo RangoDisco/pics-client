@@ -14,7 +14,7 @@ module.exports = {
       munsellBlue: "#188FA7",
       steelTeal: "#738e93",
       darkSeaGreen: "#7FB685",
-      davysGray: "#5C5C5C",
+      davysGrey: "#5C5C5C",
       red: "#FF1F1F",
 
       // Light theme
