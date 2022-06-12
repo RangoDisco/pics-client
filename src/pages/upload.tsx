@@ -1,15 +1,20 @@
 import Head from "next/head";
-import { ChangeEvent, FC, useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import Select from "../components/Select";
 import TextInput from "../components/TextInput";
+import { useAuth } from "../contexts/Auth/AuthProvider";
 import { ICollection } from "../contexts/Pictures/types";
 
-const Upload: FC = () => {
+const Upload = () => {
   const [title, setTitle] = useState<string>("");
   const [date, setDate] = useState<Date | null>(null);
   const [location, setLocation] = useState<string>("");
   const [collection, setCollection] = useState<ICollection>();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const { currentUser } = useAuth();
+  const router = useRouter();
 
   const handleFileInput = () => {
     fileInputRef.current?.click();
@@ -26,55 +31,62 @@ const Upload: FC = () => {
     formData.append(event.target.files[0].name, event.target.files[0]);
   };
 
+  useEffect(() => {
+    if (currentUser?.role !== "ADMIN") {
+      router.push("/");
+    }
+  }, [currentUser, router]);
   return (
-    <>
-      <Head>
-        <title>Pic-Nic Upload</title>
-        <meta name="description" content="Page upload" />
-      </Head>
-      <section
-        className="h-full bg-richBlack text-ghostWhite"
-        style={{ minHeight: "94.1vh" }}
-      >
-        <form
-          style={{ height: "94.1vh" }}
-          className="h-full flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
+    currentUser?.role === "ADMIN" && (
+      <>
+        <Head>
+          <title>Pic-Nic Upload</title>
+          <meta name="description" content="Page upload" />
+        </Head>
+        <section
+          className="h-full bg-richBlack text-ghostWhite"
+          style={{ minHeight: "94.1vh" }}
         >
-          <div className="flex flex-col">
-            <TextInput
-              label="title"
-              type="text"
-              value={title}
-              setValue={setTitle}
-              required={true}
-            />
-          </div>
-          <div className="flex flex-col mt-8">
-            <TextInput
-              label="location"
-              type="location"
-              value={location}
-              setValue={setLocation}
-              required={true}
-            />
-          </div>
-          <div className="flex flex-col mt-8"></div>
-          <div className="mt-8">
-            <button type="button" onClick={handleFileInput}>
-              Add picture
-            </button>
-            <input
-              multiple={false}
-              name="pictureFile"
-              onChange={onChangeHandler}
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              type="file"
-            />
-          </div>
-        </form>
-      </section>
-    </>
+          <form
+            style={{ height: "94.1vh" }}
+            className="h-full flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
+          >
+            <div className="flex flex-col">
+              <TextInput
+                label="title"
+                type="text"
+                value={title}
+                setValue={setTitle}
+                required={true}
+              />
+            </div>
+            <div className="flex flex-col mt-8">
+              <TextInput
+                label="location"
+                type="location"
+                value={location}
+                setValue={setLocation}
+                required={true}
+              />
+            </div>
+            <div className="flex flex-col mt-8"></div>
+            <div className="mt-8">
+              <button type="button" onClick={handleFileInput}>
+                Add picture
+              </button>
+              <input
+                multiple={false}
+                name="pictureFile"
+                onChange={onChangeHandler}
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                type="file"
+              />
+            </div>
+          </form>
+        </section>
+      </>
+    )
   );
 };
 
