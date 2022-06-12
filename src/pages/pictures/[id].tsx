@@ -26,7 +26,7 @@ const FullPicture: FC<IProps> = ({ picture, error }: IProps) => {
   return (
     <>
       <Head>
-        <title>Pic-Nic {picture?.title || "photo"}</title>
+        <title>Pic-Nic {"photo"}</title>
         <meta name="description" content="Page photo" />
       </Head>
       <section className="bg-silk dark:bg-richBlack h-screen">
