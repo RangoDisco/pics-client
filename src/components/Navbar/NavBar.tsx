@@ -49,7 +49,11 @@ const NavBar: FC = () => {
         <div className="bg-creme dark:bg-raisinBlack p-4 flex flex-row justify-between items-center text-richBlack dark:text-ghostWhite sticky top-0 z-50">
           <div className="flex flex-row items-center w-3/4 lg:gap-10 md:gap-5 gap-2">
             <Link href="/" passHref>
-              <div className="transition-color duration-200 hover:text-rose dark:hover:text-munsellBlue cursor-pointer flex flex-row items-center">
+              <div
+                className={`transition-color duration-200 hover:text-rose dark:hover:text-munsellBlue cursor-pointer flex flex-row items-center ${
+                  router.asPath === "/" && "text-rose dark:text-munsellBlue"
+                }`}
+              >
                 <RiCameraLensFill size={32} />
               </div>
             </Link>

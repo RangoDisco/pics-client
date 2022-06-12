@@ -15,7 +15,6 @@ const PicturesList: FC<IProps> = ({ pictures }: IProps) => {
             <PictureCard
               key={picture.id}
               id={picture.id}
-              title={picture.title}
               url={picture.contentUrl}
               date={picture.date}
               location={picture.location}
