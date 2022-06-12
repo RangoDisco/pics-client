@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { IUser } from "../Users/types";
 import { SIGNIN } from "./gql/mutations";
 import { GETCURRENTUSER } from "./gql/queries";
-import { IAuthContext } from "./types";
+import { IAuthContext, IProfilePictureType } from "./types";
 interface IProps {
   children: ReactNode;
 }
@@ -15,6 +15,8 @@ const AuthProvider = (props: IProps) => {
   const [isConnected, setIsConnected] = useState(false);
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [error, setError] = useState("");
+  const [profilePictureVariant, setProfilePictureVariant] =
+    useState<IProfilePictureType>("ring");
   const [isLoading, setIsLoading] = useState(false);
   const [execWhoAmI] = useLazyQuery(GETCURRENTUSER);
   const [doSignIn] = useMutation(SIGNIN);
@@ -57,10 +59,23 @@ const AuthProvider = (props: IProps) => {
     }
   }, [execWhoAmI]);
 
+  const isVariantValid = (variant: string) => {
+    return ["marble", "beam", "pixel", "sunset", "ring", "bauhaus"].includes(
+      variant
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (currentUser) {
         setIsConnected(true);
+        const profilePictureVariant = localStorage.getItem(
+          "profilePictureVariant"
+        );
+        if (profilePictureVariant)
+          setProfilePictureVariant(
+            profilePictureVariant as IProfilePictureType
+          );
       } else {
         if (localStorage.getItem("token")) {
           await fetchCurrentUser();
@@ -81,6 +96,9 @@ const AuthProvider = (props: IProps) => {
     error,
     isLoading,
     signOut,
+    profilePictureVariant,
+    setProfilePictureVariant,
+    isVariantValid,
   };
 
   return (

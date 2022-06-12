@@ -1,26 +1,17 @@
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import {
-  RiCameraLensFill,
-  RiLogoutBoxRLine,
-  RiMoonFill,
-  RiSunFill,
-} from "react-icons/ri";
+import { RiCameraLensFill, RiMoonFill, RiSunFill } from "react-icons/ri";
 import { useAuth } from "../../contexts/Auth/AuthProvider";
 import NavButton from "./NavButton";
+import UserDropdown from "./UserDropdown";
 
 const NavBar: FC = () => {
   const [isMounted, setMounted] = useState(false);
   const router = useRouter();
-  const { signOut, currentUser, fetchCurrentUser } = useAuth();
+  const { currentUser, fetchCurrentUser } = useAuth();
   const { theme, setTheme } = useTheme();
-
-  const handleSignOut = () => {
-    signOut();
-    Router.push("/signin");
-  };
 
   const handleChangeTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -72,14 +63,13 @@ const NavBar: FC = () => {
             >
               {renderThemeIcons()}
             </div>
-            <div
-              className="mr-2 justify-self-end cursor-pointer"
-              onClick={handleSignOut}
-            >
-              <RiLogoutBoxRLine
+            <div className="mr-2 justify-self-end cursor-pointer">
+              {/* <RiLogoutBoxRLine
                 size={22}
                 className="transition-color duration-200 hover:text-rose dark:hover:text-munsellBlue"
-              />
+              /> */}
+
+              <UserDropdown isMounted={isMounted} />
             </div>
           </div>
         </div>
