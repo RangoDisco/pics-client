@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
+    "test": "jest a --watchAll=false",
     "docker-dev": "docker-compose -f docker-compose.dev.yml up --build"
   },
   "dependencies": {
