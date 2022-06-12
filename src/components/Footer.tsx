@@ -17,7 +17,7 @@ const Footer: FC = () => {
         </a>
         <a
           className="transition-all duration-200 hover:text-rose dark:hover:text-munsellBlue ml-4"
-          href="https:maxime-dias.fr"
+          href="https://maxime-dias.fr"
           target="_blank"
           rel="noreferrer"
         >
