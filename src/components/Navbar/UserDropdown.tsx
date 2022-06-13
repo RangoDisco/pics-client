@@ -40,15 +40,15 @@ const UserDropdown = ({ isMounted }: IProps) => {
                 variant={profilePictureVariant}
                 colors={
                   theme === "light"
-                    ? ["#188FA7", "#F7B32B", "#7FB685"]
-                    : ["#FCF9EE", "#F9F4DE", "#D5869C"]
+                    ? ["#D5869C", "#ffd6a5", "#ffadad"]
+                    : ["#7FB685", "#188FA7", "#F7B32B"]
                 }
               />
             </div>
           )}
           {isDropwdownOpen && (
             <div
-              className="origin-top-right mr-10 bg-silk dark:bg-richBlack absolute right-0 mt-2 w-56 rounded-md shadow-lg border-b border-1 border-davysGrey py-2"
+              className="origin-top-right mr-10 bg-silk dark:bg-richBlack absolute right-0 mt-2 w-36 rounded-md shadow-lg border border-1 border-davysGrey py-1"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"

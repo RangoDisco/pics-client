@@ -21,6 +21,8 @@ module.exports = {
       silk: "#FCF9EE",
       creme: "#F9F4DE",
       rose: "#D5869C",
+      orange: "#ffd6a5",
+      pastelRed: "#ffadad",
     },
     extend: {},
   },
