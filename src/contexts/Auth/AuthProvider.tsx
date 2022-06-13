@@ -16,7 +16,7 @@ const AuthProvider = (props: IProps) => {
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [error, setError] = useState("");
   const [profilePictureVariant, setProfilePictureVariant] =
-    useState<IProfilePictureType>("ring");
+    useState<IProfilePictureType>(undefined);
   const [isLoading, setIsLoading] = useState(false);
   const [execWhoAmI] = useLazyQuery(GETCURRENTUSER);
   const [doSignIn] = useMutation(SIGNIN);
