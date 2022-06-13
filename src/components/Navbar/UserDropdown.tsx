@@ -1,7 +1,7 @@
 import { useAuth } from "../../contexts/Auth/AuthProvider";
 import Avatar from "boring-avatars";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 
 interface IProps {
@@ -10,7 +10,12 @@ interface IProps {
 
 const UserDropdown = ({ isMounted }: IProps) => {
   const [isDropwdownOpen, setIsDropdownOpen] = useState(false);
-  const { currentUser, signOut, profilePictureVariant } = useAuth();
+  const {
+    currentUser,
+    signOut,
+    profilePictureVariant,
+    setProfilePictureVariant,
+  } = useAuth();
   const router = useRouter();
   const { theme } = useTheme();
 
@@ -27,6 +32,13 @@ const UserDropdown = ({ isMounted }: IProps) => {
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropwdownOpen);
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("profilePictureVariant")) {
+      setProfilePictureVariant("ring");
+      localStorage.setItem("profilePictureVariant", "ring");
+    }
+  }, [profilePictureVariant, setProfilePictureVariant]);
 
   return (
     <>
