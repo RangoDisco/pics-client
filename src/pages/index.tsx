@@ -9,6 +9,7 @@ import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
 import { execQuery } from "../../graphqlClient";
 import { useRouter } from "next/router";
+import { getCookie } from "cookies-next";
 
 interface IProps {
   ssrPictures: IPicture[];
@@ -71,7 +72,6 @@ const Home: NextPage<IProps> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  console.log("req", req);
   try {
     const res = await execQuery(
       FETCHPICTURES,

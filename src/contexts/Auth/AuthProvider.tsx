@@ -34,15 +34,8 @@ const AuthProvider = (props: IProps) => {
         console.log(res.data.login);
         try {
           setCookies("token", res.data.login.access_token, {
-            httpOnly: true,
             sameSite: "none",
             maxAge: 1800,
-            domain: "https://api.dev.pics.maxime-dias.fr",
-            secure: true,
-          });
-          setCookies("testCoook", "ratio", {
-            httpOnly: true,
-            sameSite: "none",
             secure: true,
           });
         } catch (error) {

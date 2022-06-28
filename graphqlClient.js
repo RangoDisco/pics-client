@@ -1,13 +1,15 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { checkCookies, getCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 
 export const createApolloClient = ({ req }) => {
   const authLink = setContext((_, { headers }) => {
+    const token = getCookie("token", { req });
     return {
       headers: {
         ...headers,
         "Access-Control-Allow-Credentials": true,
+        Authorization: `Bearer ${token}`,
       },
     };
   });
@@ -24,10 +26,6 @@ export const createApolloClient = ({ req }) => {
 
 export const execQuery = async (query, variables, { req }) => {
   const client = createApolloClient({ req });
-
-  if (!checkCookies("token", { req })) {
-    throw new Error("No token");
-  }
 
   const res = await client.query({
     query: query,

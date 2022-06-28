@@ -15,18 +15,19 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ThreeBody } from "@uiball/loaders";
 import { ThemeProvider } from "next-themes";
+import { getCookie } from "cookies-next";
 
 const httpLink = createHttpLink({
   uri: `${process.env.HOST_API}/graphql`,
-  credentials: "include",
 });
 const authLink = setContext((_, { headers }) => {
+  const token = getCookie("token");
   return {
     headers: {
       ...headers,
       "Access-Control-Allow-Credentials": true,
-      "Access-Control-Allow-Origin": "http://localhost:3000",
       "Access-Control-Allow-Headers": ["access-control-allow-credentials"],
+      Authorization: `Bearer ${token}`,
     },
   };
 });
