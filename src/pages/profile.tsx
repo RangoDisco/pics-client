@@ -1,7 +1,7 @@
 import { useAuth } from "../contexts/Auth/AuthProvider";
 import Avatar from "boring-avatars";
 import { useTheme } from "next-themes";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 import { IProfilePictureType } from "../contexts/Auth/types";
 
 const Profile = () => {

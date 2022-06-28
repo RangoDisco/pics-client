@@ -85,11 +85,9 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       },
     };
   } catch (error) {
-    console.log(error);
     return {
-      props: {
-        ssrError: String(error),
-      },
+      redirect: { destination: "/signin" },
+      props: {},
     };
   }
 };

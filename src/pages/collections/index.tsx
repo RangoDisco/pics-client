@@ -91,9 +91,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     };
   } catch (error) {
     return {
-      props: {
-        ssrError: String(error),
+      redirect: {
+        destination: "/",
       },
+      props: {},
     };
   }
 };
