@@ -32,7 +32,7 @@ const Home: NextPage<IProps> = ({
       setPictures(ssrPictures);
       setPicturesTotalCount(ssrPicturesTotalCount);
     } else if (ssrError === "Error: No token") {
-      router.push("/signin");
+      // router.push("/signin");
     }
   }, [ssrPictures, ssrPicturesTotalCount, ssrError, router]);
 
@@ -71,6 +71,7 @@ const Home: NextPage<IProps> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  console.log("req", req);
   try {
     const res = await execQuery(
       FETCHPICTURES,

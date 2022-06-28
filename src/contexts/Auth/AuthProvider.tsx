@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { removeCookies, setCookies } from "cookies-next";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
@@ -31,9 +31,27 @@ const AuthProvider = (props: IProps) => {
         },
       });
       if (res.data.login) {
-        setCookies("token", res.data.login.access_token);
+        console.log(res.data.login);
+        try {
+          setCookies("token", res.data.login.access_token, {
+            httpOnly: true,
+            sameSite: "none",
+            maxAge: 1800,
+            domain: "https://api.dev.pics.maxime-dias.fr",
+            secure: true,
+          });
+          setCookies("testCoook", "ratio", {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+          });
+        } catch (error) {
+          console.log("error", error);
+        }
+        localStorage.setItem("isLoggedIn", "true");
         await fetchCurrentUser();
       } else {
+        localStorage.setItem("isLoggedIn", "false");
         setError("Your email or your password is incorrect");
       }
     } catch (error) {
@@ -44,7 +62,7 @@ const AuthProvider = (props: IProps) => {
   };
 
   const signOut = () => {
-    removeCookies("token");
+    localStorage.setItem("isLoggedIn", "true");
     setIsConnected(false);
   };
 
@@ -54,7 +72,7 @@ const AuthProvider = (props: IProps) => {
       setCurrentUser(userRes.data?.getSignedInUser);
       return userRes;
     } catch (error) {
-      removeCookies("token");
+      localStorage.setItem("isLoggedIn", "false");
       setIsConnected(false);
     }
   }, [execWhoAmI]);

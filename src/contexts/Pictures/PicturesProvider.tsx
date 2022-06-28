@@ -21,12 +21,8 @@ interface IProps {
 const picturesContext = createContext<IPicturesContext>({} as IPicturesContext);
 
 const PicturesProvider = (props: IProps) => {
-  const [pictures, setPictures] = useState<IPicture[]>([]);
-  const [picturesTotalCount, setPicturesTotalCount] = useState(0);
   const [picture, setPicture] = useState<IPicture | null>(null);
 
-  const [collections, setCollections] = useState<ICollection[]>([]);
-  const [collectionsTotalCount, setCollectionsTotalCount] = useState(0);
   const [collection, setCollection] = useState<ICollection | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -128,11 +124,7 @@ const PicturesProvider = (props: IProps) => {
   );
 
   const contextValue: IPicturesContext = {
-    pictures,
-    picturesTotalCount,
     picture,
-    collections,
-    collectionsTotalCount,
     collection,
     isLoading,
     error,
