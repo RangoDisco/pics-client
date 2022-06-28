@@ -26,8 +26,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       "Access-Control-Allow-Credentials": true,
-      "Access-Control-Allow-Headers": ["access-control-allow-credentials"],
-      Authorization: `Bearer ${token}`,
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
   };
 });

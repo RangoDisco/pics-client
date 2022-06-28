@@ -9,7 +9,6 @@ import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
 import { execQuery } from "../../graphqlClient";
 import { useRouter } from "next/router";
-import { getCookie } from "cookies-next";
 
 interface IProps {
   ssrPictures: IPicture[];
@@ -33,7 +32,7 @@ const Home: NextPage<IProps> = ({
       setPictures(ssrPictures);
       setPicturesTotalCount(ssrPicturesTotalCount);
     } else if (ssrError === "Error: No token") {
-      // router.push("/signin");
+      router.push("/signin");
     }
   }, [ssrPictures, ssrPicturesTotalCount, ssrError, router]);
 
@@ -86,6 +85,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       },
     };
   } catch (error) {
+    console.log(error);
     return {
       props: {
         ssrError: String(error),

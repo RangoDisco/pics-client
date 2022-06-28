@@ -12,7 +12,6 @@ interface IProps {
 const authContext = React.createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider = (props: IProps) => {
-  const [isConnected, setIsConnected] = useState(false);
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [error, setError] = useState("");
   const [profilePictureVariant, setProfilePictureVariant] =
@@ -31,15 +30,14 @@ const AuthProvider = (props: IProps) => {
         },
       });
       if (res.data.login) {
-        console.log(res.data.login);
         try {
           setCookies("token", res.data.login.access_token, {
-            sameSite: "none",
+            sameSite: true,
             maxAge: 1800,
             secure: true,
           });
         } catch (error) {
-          console.log("error", error);
+          console.error("error", error);
         }
         localStorage.setItem("isLoggedIn", "true");
         await fetchCurrentUser();
@@ -55,8 +53,7 @@ const AuthProvider = (props: IProps) => {
   };
 
   const signOut = () => {
-    localStorage.setItem("isLoggedIn", "true");
-    setIsConnected(false);
+    removeCookies("token");
   };
 
   const fetchCurrentUser = useCallback(async () => {
@@ -66,7 +63,6 @@ const AuthProvider = (props: IProps) => {
       return userRes;
     } catch (error) {
       localStorage.setItem("isLoggedIn", "false");
-      setIsConnected(false);
     }
   }, [execWhoAmI]);
 
@@ -79,7 +75,6 @@ const AuthProvider = (props: IProps) => {
   useEffect(() => {
     (async () => {
       if (currentUser) {
-        setIsConnected(true);
         const profilePictureVariant = localStorage.getItem(
           "profilePictureVariant"
         );
@@ -90,17 +85,12 @@ const AuthProvider = (props: IProps) => {
       } else {
         if (localStorage.getItem("token")) {
           await fetchCurrentUser();
-          setIsConnected(true);
-        } else {
-          setIsConnected(false);
         }
       }
     })();
   }, [currentUser, fetchCurrentUser]);
 
   const contextValue: IAuthContext = {
-    isConnected,
-    setIsConnected,
     currentUser,
     fetchCurrentUser,
     handleSignIn,
