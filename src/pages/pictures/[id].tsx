@@ -3,7 +3,7 @@ import { FC, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { GetServerSideProps } from "next";
-import { execQuery } from "../../../graphqlClient";
+import { execQuery } from "../../helpers/graphqlClient";
 import {
   FETCHPICTUREBYID,
   FETCHRANDOMPICTURE,

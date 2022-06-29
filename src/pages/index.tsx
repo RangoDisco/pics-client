@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import PicturesList from "../components/Pictures/PicturesList";
 import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
-import { execQuery } from "../../graphqlClient";
+import { execQuery } from "../helpers/graphqlClient";
 import { useRouter } from "next/router";
 
 interface IProps {
@@ -28,6 +28,7 @@ const Home: NextPage<IProps> = ({
   const router = useRouter();
 
   useEffect(() => {
+    console.log(process.env.HOST_API);
     if (!ssrError) {
       setPictures(ssrPictures);
       setPicturesTotalCount(ssrPicturesTotalCount);
