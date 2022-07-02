@@ -15,7 +15,7 @@ export const createApolloClient = ({ req }) => {
   });
 
   const httpLink = createHttpLink({
-    uri: `${process.env.NEXT_PUBLIC_HOST_API}/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
   });
 
   return new ApolloClient({
