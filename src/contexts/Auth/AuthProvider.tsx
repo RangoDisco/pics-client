@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import { removeCookies, setCookies } from "cookies-next";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
@@ -12,7 +12,6 @@ interface IProps {
 const authContext = React.createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider = (props: IProps) => {
-  const [isConnected, setIsConnected] = useState(false);
   const [currentUser, setCurrentUser] = useState<IUser | null>(null);
   const [error, setError] = useState("");
   const [profilePictureVariant, setProfilePictureVariant] =
@@ -31,9 +30,19 @@ const AuthProvider = (props: IProps) => {
         },
       });
       if (res.data.login) {
-        setCookies("token", res.data.login.access_token);
+        try {
+          setCookies("token", res.data.login.access_token, {
+            sameSite: true,
+            maxAge: 1800,
+            secure: true,
+          });
+        } catch (error) {
+          console.error("error", error);
+        }
+        localStorage.setItem("isLoggedIn", "true");
         await fetchCurrentUser();
       } else {
+        localStorage.setItem("isLoggedIn", "false");
         setError("Your email or your password is incorrect");
       }
     } catch (error) {
@@ -45,7 +54,6 @@ const AuthProvider = (props: IProps) => {
 
   const signOut = () => {
     removeCookies("token");
-    setIsConnected(false);
   };
 
   const fetchCurrentUser = useCallback(async () => {
@@ -54,8 +62,7 @@ const AuthProvider = (props: IProps) => {
       setCurrentUser(userRes.data?.getSignedInUser);
       return userRes;
     } catch (error) {
-      removeCookies("token");
-      setIsConnected(false);
+      localStorage.setItem("isLoggedIn", "false");
     }
   }, [execWhoAmI]);
 
@@ -68,7 +75,6 @@ const AuthProvider = (props: IProps) => {
   useEffect(() => {
     (async () => {
       if (currentUser) {
-        setIsConnected(true);
         const profilePictureVariant = localStorage.getItem(
           "profilePictureVariant"
         );
@@ -79,17 +85,12 @@ const AuthProvider = (props: IProps) => {
       } else {
         if (localStorage.getItem("token")) {
           await fetchCurrentUser();
-          setIsConnected(true);
-        } else {
-          setIsConnected(false);
         }
       }
     })();
   }, [currentUser, fetchCurrentUser]);
 
   const contextValue: IAuthContext = {
-    isConnected,
-    setIsConnected,
     currentUser,
     fetchCurrentUser,
     handleSignIn,

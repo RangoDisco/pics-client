@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import PicturesList from "../components/Pictures/PicturesList";
 import { IPicture } from "../contexts/Pictures/types";
 import { FETCHPICTURES } from "../contexts/Pictures/gql/queries";
-import { execQuery } from "../../graphqlClient";
+import { execQuery } from "../helpers/graphqlClient";
 import { useRouter } from "next/router";
 
 interface IProps {
@@ -86,9 +86,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     };
   } catch (error) {
     return {
-      props: {
-        ssrError: String(error),
-      },
+      redirect: { destination: "/signin" },
+      props: {},
     };
   }
 };

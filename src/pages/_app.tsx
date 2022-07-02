@@ -11,15 +11,14 @@ import { setContext } from "@apollo/client/link/context";
 import NavBar from "../components/Navbar/NavBar";
 import Footer from "../components/Footer";
 import PicturesProvider from "../contexts/Pictures/PicturesProvider";
-import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ThreeBody } from "@uiball/loaders";
-import { ThemeProvider, useTheme } from "next-themes";
+import { ThemeProvider } from "next-themes";
+import { getCookie } from "cookies-next";
 
 const httpLink = createHttpLink({
-  uri: `${process.env.HOST_API}/graphql`,
-  credentials: "same-origin",
+  uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
 });
 const authLink = setContext((_, { headers }) => {
   const token = getCookie("token");
@@ -27,7 +26,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       "Access-Control-Allow-Credentials": true,
-      Authorization: token ? `Bearer ${token}` : "",
+      ...(token && { Authorization: `Bearer ${token}` }),
     },
   };
 });

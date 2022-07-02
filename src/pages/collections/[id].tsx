@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
-import { execQuery } from "../../../graphqlClient";
+import { execQuery } from "../../helpers/graphqlClient";
 import PicturesList from "../../components/Pictures/PicturesList";
 import SpotifyLogoLink from "../../components/SpotifyLogoLink";
 import { FETCHCOLLECTIONBYID } from "../../contexts/Pictures/gql/queries";
@@ -68,9 +68,10 @@ export const getServerSideProps: GetServerSideProps = async ({
     };
   } catch (error) {
     return {
-      props: {
-        error: String(error),
+      redirect: {
+        destination: "/",
       },
+      props: {},
     };
   }
 };

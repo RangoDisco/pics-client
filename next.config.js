@@ -9,7 +9,7 @@ const nextConfig = {
     defaultLocale: "en",
   },
   env: {
-    HOST_API: process.env.HOST_API,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   experimental: {
     outputStandalone: true,

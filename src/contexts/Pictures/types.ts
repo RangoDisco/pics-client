@@ -1,11 +1,7 @@
 import { IUser } from "../Users/types";
 
 export interface IPicturesContext {
-  pictures: IPicture[];
-  picturesTotalCount: number;
   picture: IPicture | null;
-  collections: ICollection[];
-  collectionsTotalCount: number;
   collection: ICollection | null;
   isLoading: boolean;
   error: string;

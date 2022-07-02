@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { FC, useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
-import { execQuery } from "../../../graphqlClient";
+import { execQuery } from "../../helpers/graphqlClient";
 import CollectionsList from "../../components/Collection/CollectionsList";
 import { FETCHCOLLECTIONS } from "../../contexts/Pictures/gql/queries";
 import { usePics } from "../../contexts/Pictures/PicturesProvider";
@@ -91,9 +91,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     };
   } catch (error) {
     return {
-      props: {
-        ssrError: String(error),
+      redirect: {
+        destination: "/",
       },
+      props: {},
     };
   }
 };

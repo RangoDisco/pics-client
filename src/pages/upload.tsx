@@ -32,12 +32,12 @@ const Upload = () => {
   };
 
   useEffect(() => {
-    if (currentUser?.role !== "ADMIN") {
+    if (currentUser?.role !== "Admin") {
       router.push("/");
     }
   }, [currentUser, router]);
   return (
-    currentUser?.role === "ADMIN" && (
+    currentUser?.role === "Admin" && (
       <>
         <Head>
           <title>Pic-Nic Upload</title>
@@ -49,7 +49,7 @@ const Upload = () => {
         >
           <form
             style={{ height: "94.1vh" }}
-            className="h-full flex flex-col justify-center items-center bg-richBlack text-ghostWhite"
+            className="h-full flex flex-col justify-center items-center bg-creme dark:bg-richBlack text-richBlack dark:text-ghostWhite"
           >
             <div className="flex flex-col">
               <TextInput
