@@ -28,7 +28,7 @@ const Home: NextPage<IProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    console.log(process.env.HOST_API);
+    console.log(process.env.NEXT_PUBLIC_HOST_API);
     if (!ssrError) {
       setPictures(ssrPictures);
       setPicturesTotalCount(ssrPicturesTotalCount);

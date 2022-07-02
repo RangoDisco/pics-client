@@ -18,7 +18,7 @@ import { ThemeProvider } from "next-themes";
 import { getCookie } from "cookies-next";
 
 const httpLink = createHttpLink({
-  uri: `${process.env.HOST_API}/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_HOST_API}/graphql`,
 });
 const authLink = setContext((_, { headers }) => {
   const token = getCookie("token");
