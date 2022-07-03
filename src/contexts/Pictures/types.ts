@@ -1,3 +1,4 @@
+import { FetchResult } from "@apollo/client";
 import { IUser } from "../Users/types";
 
 export interface IPicturesContext {
@@ -20,6 +21,12 @@ export interface IPicturesContext {
     { collections: ICollection[]; collectionsTotalCount: number } | undefined
   >;
   fetchCollectionById: (id: number) => Promise<void>;
+  uploadPicture: (
+    file: any
+  ) => Promise<
+    undefined | FetchResult<any, Record<string, any>, Record<string, any>>
+  >;
+  createPicture: (pictureBody: IPictureInput) => Promise<boolean>;
 }
 export interface IPicture {
   id: number;
@@ -29,6 +36,13 @@ export interface IPicture {
   author: IUser;
   creationDate: Date;
   isActive: boolean;
+}
+
+export interface IPictureInput {
+  location: string;
+  date: string;
+  contentUrl: string;
+  collections: number[];
 }
 
 export interface ICollection {

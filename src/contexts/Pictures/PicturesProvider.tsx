@@ -1,4 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import {
   createContext,
   ReactNode,
@@ -6,6 +6,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { CREATEPICTURE, UPLOADIMAGE } from "./gql/mutations";
 import {
   FETCHCOLLECTIONBYID,
   FETCHCOLLECTIONS,
@@ -13,7 +14,12 @@ import {
   FETCHPICTURES,
   FETCHRANDOMPICTURE,
 } from "./gql/queries";
-import { ICollection, IPicture, IPicturesContext } from "./types";
+import {
+  ICollection,
+  IPicture,
+  IPictureInput,
+  IPicturesContext,
+} from "./types";
 
 interface IProps {
   children: ReactNode;
@@ -33,6 +39,8 @@ const PicturesProvider = (props: IProps) => {
   const [execFindCollections] = useLazyQuery(FETCHCOLLECTIONS);
   const [execFindCollectionById] = useLazyQuery(FETCHCOLLECTIONBYID);
   const [execFindRandom] = useLazyQuery(FETCHRANDOMPICTURE);
+  const [doUploadPicture] = useMutation(UPLOADIMAGE);
+  const [doCreatePicture] = useMutation(CREATEPICTURE);
 
   const fetchPictures = useCallback(
     async (first: number, after: number) => {
@@ -123,6 +131,40 @@ const PicturesProvider = (props: IProps) => {
     [execFindCollectionById]
   );
 
+  const uploadPicture = async (file: any) => {
+    try {
+      setIsLoading(true);
+      const res = await doUploadPicture({
+        variables: {
+          file,
+        },
+      });
+      return res;
+    } catch (error) {
+      setError("Unable to upload picture");
+      console.error("error", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const createPicture = async (pictureBody: IPictureInput) => {
+    try {
+      setIsLoading(true);
+      await doCreatePicture({
+        variables: {
+          createPictureInput: { ...pictureBody },
+        },
+      });
+      return true;
+    } catch (error) {
+      setError("Unable to create picture");
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const contextValue: IPicturesContext = {
     picture,
     collection,
@@ -133,6 +175,8 @@ const PicturesProvider = (props: IProps) => {
     fetchRandomPicture,
     fetchCollections,
     fetchCollectionById,
+    uploadPicture,
+    createPicture,
   };
   return (
     <picturesContext.Provider value={contextValue}>
