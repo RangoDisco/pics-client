@@ -6,32 +6,22 @@ import { useTheme } from "next-themes";
 
 interface IProps {
   isMounted: boolean;
+  isDropdownOpen: boolean;
+  handleToggleDropdown: () => void;
+  redirectToProfile: () => void;
+  handleSignOut: () => void;
 }
 
-const UserDropdown = ({ isMounted }: IProps) => {
-  const [isDropwdownOpen, setIsDropdownOpen] = useState(false);
-  const {
-    currentUser,
-    signOut,
-    profilePictureVariant,
-    setProfilePictureVariant,
-  } = useAuth();
-  const router = useRouter();
+const UserDropdown = ({
+  isMounted,
+  isDropdownOpen,
+  handleToggleDropdown,
+  redirectToProfile,
+  handleSignOut,
+}: IProps) => {
+  const { currentUser, profilePictureVariant, setProfilePictureVariant } =
+    useAuth();
   const { theme } = useTheme();
-
-  const handleSignOut = () => {
-    signOut();
-    router.push("/signin");
-  };
-
-  const redirectToProfile = () => {
-    router.push("/profile");
-    setIsDropdownOpen(false);
-  };
-
-  const handleToggleDropdown = () => {
-    setIsDropdownOpen(!isDropwdownOpen);
-  };
 
   useEffect(() => {
     if (!localStorage.getItem("profilePictureVariant")) {
@@ -58,7 +48,7 @@ const UserDropdown = ({ isMounted }: IProps) => {
               />
             </div>
           )}
-          {isDropwdownOpen && (
+          {isDropdownOpen && (
             <div
               className="origin-top-right mr-10 bg-silk dark:bg-richBlack absolute right-0 mt-2 w-36 rounded-md shadow-lg border border-1 border-davysGrey py-1"
               role="menu"
