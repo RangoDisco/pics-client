@@ -3,11 +3,10 @@ import type { AppProps } from "next/app";
 import AuthProvider from "../contexts/Auth/AuthProvider";
 import {
   ApolloClient,
+  ApolloLink,
   ApolloProvider,
-  createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
 import NavBar from "../components/Navbar/NavBar";
 import Footer from "../components/Footer";
 import PicturesProvider from "../contexts/Pictures/PicturesProvider";
@@ -16,23 +15,20 @@ import { useRouter } from "next/router";
 import { ThreeBody } from "@uiball/loaders";
 import { ThemeProvider } from "next-themes";
 import { getCookie } from "cookies-next";
+import { createUploadLink } from "apollo-upload-client";
 
-const httpLink = createHttpLink({
-  uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
-});
-const authLink = setContext((_, { headers }) => {
+const createHttpLink = () => {
   const token = getCookie("token");
-  return {
+  return createUploadLink({
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/graphql`,
     headers: {
-      ...headers,
-      "Access-Control-Allow-Credentials": true,
       ...(token && { Authorization: `Bearer ${token}` }),
     },
-  };
-});
+  });
+};
 
 export const graphqlClient = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: createHttpLink() as unknown as ApolloLink,
   cache: new InMemoryCache(),
 });
 
