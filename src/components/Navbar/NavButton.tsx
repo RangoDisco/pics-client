@@ -5,8 +5,13 @@ import { FC, useEffect, useState } from "react";
 interface IProps {
   title: string;
   pathName: string;
+  setIsMobileDropdownOpen?: any;
 }
-const NavButton: FC<IProps> = ({ title, pathName }: IProps) => {
+const NavButton: FC<IProps> = ({
+  title,
+  pathName,
+  setIsMobileDropdownOpen,
+}: IProps) => {
   const router = useRouter();
   const [isCurrentPath, setIsCurrentPath] = useState(false);
 
@@ -14,16 +19,20 @@ const NavButton: FC<IProps> = ({ title, pathName }: IProps) => {
     setIsCurrentPath(router.asPath === pathName);
   }, [router, pathName]);
 
+  const navToPathname = () => {
+    setIsMobileDropdownOpen(false);
+    router.push(pathName);
+  };
+
   return (
-    <Link href={pathName} passHref>
-      <p
-        className={`transition:colors duration-200 hover:text-rose dark:hover:text-munsellBlue cursor-pointer ${
-          isCurrentPath && "text-rose dark:text-munsellBlue underline"
-        }`}
-      >
-        {title}
-      </p>
-    </Link>
+    <p
+      onClick={navToPathname}
+      className={`transition:colors duration-200 hover:text-rose dark:hover:text-munsellBlue cursor-pointer ${
+        isCurrentPath && "text-rose dark:text-munsellBlue underline"
+      }`}
+    >
+      {title}
+    </p>
   );
 };
 
