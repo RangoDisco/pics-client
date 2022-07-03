@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { removeCookies, setCookies } from "cookies-next";
+import { removeCookies, setCookie } from "cookies-next";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { IUser } from "../Users/types";
@@ -31,7 +31,7 @@ const AuthProvider = (props: IProps) => {
       });
       if (res.data.login) {
         try {
-          setCookies("token", res.data.login.access_token, {
+          setCookie("token", res.data.login.access_token, {
             sameSite: true,
             maxAge: 1800,
             secure: true,
