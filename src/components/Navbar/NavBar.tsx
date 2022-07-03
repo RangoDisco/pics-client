@@ -42,7 +42,7 @@ const NavBar: FC = () => {
   useEffect(() => {
     setMounted(true);
     fetchCurrentUser();
-  }, [fetchCurrentUser]);
+  }, [fetchCurrentUser, router.pathname]);
 
   const renderThemeIcons = () => {
     if (!isMounted) {
