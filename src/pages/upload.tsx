@@ -95,7 +95,7 @@ const Upload = ({ ssrCollections }: IProps) => {
             className="h-full flex flex-col justify-center items-center bg-silk dark:bg-richBlack text-richBlack dark:text-ghostWhite"
             onSubmit={handleFormSubmit}
           >
-            <div className="flex flex-col mt-8 w-1/4">
+            <div className="flex flex-col mt-8 lg:w-1/6 md:w-1/3 w-2/3">
               <div
                 className="self-centered w-full h-64 bg-creme dark:bg-raisinBlack rounded-lg flex justify-center items-center cursor-pointer"
                 onClick={handleFileInput}
@@ -121,7 +121,7 @@ const Upload = ({ ssrCollections }: IProps) => {
                 accept="image/jpg"
               />
             </div>
-            <div className="flex flex-col mt-8 w-1/6">
+            <div className="flex flex-col mt-8 lg:w-1/6 md:w-1/3 w-2/3">
               <TextInput
                 label="location"
                 type="location"
@@ -130,7 +130,7 @@ const Upload = ({ ssrCollections }: IProps) => {
                 required={true}
               />
             </div>
-            <div className="flex flex-col mt-8 w-1/6">
+            <div className="flex flex-col mt-8 lg:w-1/6 md:w-1/3 w-2/3">
               <select
                 defaultValue="default"
                 onChange={handleSelectCollection}
@@ -144,7 +144,7 @@ const Upload = ({ ssrCollections }: IProps) => {
                 ))}
               </select>
             </div>
-            <div className="flex flex-col mt-8 w-1/6">
+            <div className="flex flex-col mt-8 lg:w-1/6 md:w-1/3 w-2/3">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg
@@ -166,7 +166,7 @@ const Upload = ({ ssrCollections }: IProps) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col mt-8 w-1/6 items-center">
+            <div className="flex flex-col mt-8 lg:w-1/6 md:w-1/3 w-2/3 items-center">
               <button
                 type="submit"
                 className={`self-centered bg-rose dark:bg-munsellBlue w-full rounded-full p-2 mb-2 transition:colors duration-200 text-ghostWhite ${
